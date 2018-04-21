@@ -1,0 +1,43 @@
+// home首页icon颜色控制
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-0]{
+  color: color($colors, homered) !important;
+}
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-0] .tab-button-icon {
+  color: color($colors, homered) !important;
+}
+
+// club社团页icon颜色控制
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-1] {
+  color: color($colors, clubgreen) !important;
+}
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-1] .tab-button-icon {
+  color: color($colors, clubgreen) !important;
+}
+
+
+// circle圈子页icon颜色控制
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-2] {
+  color: color($colors, circleblue) !important;
+}
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-2] .tab-button-icon {
+  color: color($colors, circleblue) !important;
+}
+
+// notifications通知页icon颜色控制
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-3] {
+  color: color($colors, dark) !important;
+}
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-3] .tab-button-icon {
+  color: color($colors, dark) !important;
+
+}
+
+// user用户页icon颜色控制
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-4] {
+  color: color($colors,purple) !important;
+}
+
+.tab-button[aria-selected=true][aria-controls=tabpanel-t0-4] .tab-button-icon {
+  color: color($colors, purple) !important;
+
+}

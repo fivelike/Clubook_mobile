@@ -38,7 +38,14 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+
+  //自定义颜色
+  homered:    #db4437,
+  clubgreen:  #0f9d58,
+  circleblue: #03A9F4,
+purple:  #7D56C1
+
 );
 
 
@@ -86,3 +93,5 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
