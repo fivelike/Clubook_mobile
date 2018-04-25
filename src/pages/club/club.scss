@@ -1,4 +1,55 @@
 page-club {
-
-
+  //card样式控制
+  ion-card {
+    float: left;
+    margin: 1% !important;
+    width: 48% !important;
+    height: 18rem;
+  }
+  .top-image {
+    height: 40%;
+    background-color: #222 !important;
+  }
+  .top-image img {
+    height: 100%;
+  }
+  .bottom-content {
+    height: 45%;
+  }
+  .circle-title {
+    font-size: 1.6rem;
+    max-height: 70%;
+  }
+  .circle-members {
+    font-size: 1.2rem;
+  }
+  .bottom-button {
+    height: 15%;
+  }
+  .bottom-button button {
+    height: 100%;
+    margin: 0% !important;
+  } //创建社团card样式
+  .add-club {
+    position: relative;
+    text-align: center;
+    // background: rgb(240, 237, 237);
+  }
+  .add-club ion-icon {
+    position: absolute;
+    top: 16%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 8rem;
+    color: rgb(107, 101, 101);
+  }
+  .card-title {
+    position: absolute;
+    top: 60%;
+    font-size: 1.5em;
+    width: 100%;
+    font-weight: bold;
+    color: rgb(107, 101, 101);
+  }
 }

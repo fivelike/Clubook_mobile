@@ -1,12 +1,96 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar color="circleblue">
+  <ion-navbar no-border-bottom color="circleblue" *ngIf = "display">
     <ion-title>圈子</ion-title>
   </ion-navbar>
+
+  <ion-toolbar no-border-top color="circleblue">
+    <ion-segment [(ngModel)]="circle" color="white">
+      <ion-segment-button value="recommend">
+        推荐
+      </ion-segment-button>
+      <ion-segment-button value="member">
+        成员
+      </ion-segment-button>
+      <ion-segment-button value="yours">
+        你的圈子
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
+
+<ion-content (ionScroll)="scrollHandler($event)">
+
+<div [ngSwitch]="circle">
+  <div *ngSwitchCase="'recommend'">
+
+    <ion-card *ngFor="let circle of circles">
+      <div class="top-image">
+        <img src="assets/imgs/test.jpg">
+      </div>
+      <div class="bottom-content">
+        <ion-card-content>
+          <p class="circle-title">{{circle.name}}</p>
+          <p class="circle-members">198,300个成员</p>
+        </ion-card-content>
+      </div>
+      <div class="bottom-button">
+        <button ion-button color="circleblue" clear>加入</button>
+      </div>
+    </ion-card>
+
+  </div>
+</div>
+
+<div [ngSwitch]="circle">
+  <div *ngSwitchCase="'member'">
+
+    <ion-card *ngFor="let circle of circles">
+      <div class="top-image">
+        <img src="assets/imgs/test.jpg">
+      </div>
+      <div class="bottom-content">
+        <ion-card-content>
+          <p class="circle-title">{{circle.name}}</p>
+          <p class="circle-members">198,300个成员</p>
+        </ion-card-content>
+      </div>
+      <div class="bottom-button">
+        <button ion-button color="circleblue" clear>加入</button>
+      </div>
+    </ion-card>
+
+  </div>
+</div>
+
+<div [ngSwitch]="circle">
+  <div *ngSwitchCase="'yours'">
+    <ion-card class="add-club" text-center>
+      <ion-icon name="add-circle"></ion-icon>
+      <div class="card-title">创建社团</div>
+    </ion-card>
+    <ion-card *ngFor="let circle of circles">
+      <div class="top-image">
+        <img src="assets/imgs/test.jpg">
+      </div>
+      <div class="bottom-content">
+        <ion-card-content>
+          <p class="circle-title">{{circle.name}}</p>
+          <p class="circle-members">198,300个成员</p>
+        </ion-card-content>
+      </div>
+      <div class="bottom-button">
+        <button ion-button color="circleblue" clear>加入</button>
+      </div>
+    </ion-card>
+
+  </div>
+</div>
+
+
+
 
 </ion-content>
