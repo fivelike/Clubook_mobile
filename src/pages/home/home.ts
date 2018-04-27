@@ -1,5 +1,6 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController,Content, Tabs } from 'ionic-angular';
+import { NavController,Content, Tabs, ModalController } from 'ionic-angular';
+import { CreatepassagePage } from '../createpassage/createpassage';
 
 @Component({
   selector: 'page-home',
@@ -10,10 +11,21 @@ export class HomePage {
 
   public display:boolean = true;
 
+  public passages:any;
 
   constructor(public navCtrl: NavController,
-  public ngzone:NgZone) {
-
+  public ngzone:NgZone,
+  public modalCtrl:ModalController) {
+    this.passages = [
+      { "name": "社团1" },
+      { "name": "社团2" },
+      { "name": "社团3" },
+      { "name": "社团4" },
+      { "name": "社团5" },
+      { "name": "社团6" },
+      { "name": "社团7" },
+      { "name": "社团8" }
+    ];
   }
 
 
@@ -38,5 +50,10 @@ export class HomePage {
     t.setTabbarHidden(p);
   }
 
+
+  createPassage(){
+    let modal = this.modalCtrl.create(CreatepassagePage);
+    modal.present();
+  }
 
 }

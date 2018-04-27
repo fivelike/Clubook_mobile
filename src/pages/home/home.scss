@@ -1,3 +1,52 @@
 page-home {
 
+    .card{
+         margin-left: 0;
+         margin-right: 0;
+         width: 100%;
+
+    }
+    .camera_button{
+        box-shadow: none;
+    }
+    .camera_icon{
+        // line-height: 3.1rem;
+        font-size: 2.5rem;
+
+    }
+
+    .username{
+        font-weight: bold;
+    }
+    .from{
+        margin-left: 10px;
+        color: color($colors, clubgreen);
+        font-weight: 400;
+    }
+    .from_icon{
+        font-size: 1rem;
+    }
+    .time{
+        float: right;
+        font-weight: 300;
+    }
+
+
+    .card-content{
+        padding-bottom: 0;
+    }
+
+    .col{
+        padding-bottom: 0;
+    }
+    .col .button{
+        margin:0;
+    }
+
+
+
+
+
+
+
 }

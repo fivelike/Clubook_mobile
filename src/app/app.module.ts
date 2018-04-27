@@ -8,6 +8,7 @@ import { CirclePage } from '../pages/circle/circle';
 import { ClubPage } from '../pages/club/club';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { UserPage } from '../pages/user/user';
+import { CreatepassagePage } from '../pages/createpassage/createpassage';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -21,7 +22,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ClubPage,
     NotificationsPage,
     UserPage,
-    TabsPage
+    TabsPage,
+    CreatepassagePage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ClubPage,
     NotificationsPage,
     UserPage,
-    TabsPage
+    TabsPage,
+    CreatepassagePage
   ],
   providers: [
     StatusBar,

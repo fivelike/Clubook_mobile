@@ -1,59 +1,72 @@
-<ion-header *ngIf = "display">
+<ion-header *ngIf="display">
   <ion-navbar>
     <ion-title>首页</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content (ionScroll)="scrollHandler($event)"> 
+<ion-content (ionScroll)="scrollHandler($event)">
 
 
-<ion-fab right bottom *ngIf = "display">
-  <button ion-fab color="homered">
-    <ion-icon name="create"></ion-icon>
-  </button>
-</ion-fab>
+  <ion-fab right bottom *ngIf="display">
+    <button ion-fab color="homered" (click)="createPassage()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/test.jpg">
+      </ion-avatar>
+      <p>你有什么新鲜事想要分享吗？</p>
+      <ion-avatar item-end>
+        <button ion-button round icon-only class="camera_button" color="light">
+          <ion-icon class="camera_icon" name="camera"></ion-icon>
+        </button>
+      </ion-avatar>
+    </ion-item>
+  </ion-card>
 
 
-<ion-card>
-  <img src="assets/imgs/test.jpg" />
-  <ion-card-content>
-    <ion-card-title>
-      Nine Inch Nails Live
-    </ion-card-title>
-    <p>
-      The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-</ion-card>
-<ion-card>
-  <img src="assets/imgs/test.jpg" />
-  <ion-card-content>
-    <ion-card-title>
-      Nine Inch Nails Live
-    </ion-card-title>
-    <p>
-      The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-</ion-card><ion-card>
-  <img src="assets/imgs/test.jpg" />
-  <ion-card-content>
-    <ion-card-title>
-      Nine Inch Nails Live
-    </ion-card-title>
-    <p>
-      The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-</ion-card><ion-card>
-  <img src="assets/imgs/test.jpg" />
-  <ion-card-content>
-    <ion-card-title>
-      Nine Inch Nails Live
-    </ion-card-title>
-    <p>
-      The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-    </p>
-  </ion-card-content>
-</ion-card>
+
+  <ion-card *ngFor="let p of passages">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/test.jpg">
+
+      </ion-avatar>
+      <p class="username">Five like
+        <span class="from">
+          <ion-icon class="from_icon" name="play"></ion-icon>
+          &nbsp;{{p.name}}
+        </span>
+        <span class="time">2天前</span>
+      </p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>ContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummary</p>
+    </ion-card-content>
+  <ion-row>
+    <ion-col col-8>
+      <button ion-button icon-left clear color="light-dark">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>19</div>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button icon-left clear color="light-dark">
+        <ion-icon name="text"></ion-icon>
+        <div>9</div>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button clear color="light-dark">
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  </ion-card>
+
+
 </ion-content>
