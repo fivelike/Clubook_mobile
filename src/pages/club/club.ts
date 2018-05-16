@@ -1,5 +1,6 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController, Content, Tabs } from 'ionic-angular';
+import { NavController, Content, Tabs, ModalController } from 'ionic-angular';
+import { CreateclubPage } from '../createclub/createclub';
 
 @Component({
   selector: 'page-club',
@@ -13,7 +14,8 @@ export class ClubPage {
 
   public clubs:any;
   constructor(public navCtrl: NavController,
-    public ngzone: NgZone) {
+    public ngzone: NgZone,
+    public modalCtrl: ModalController) {
 
       this.clubs = [
     { "name": "社团1" },
@@ -48,6 +50,11 @@ export class ClubPage {
   hiddenTabs(p: boolean) {
     let t: Tabs = this.navCtrl.parent;
     t.setTabbarHidden(p);
+  }
+
+  createClub() {
+    let modal = this.modalCtrl.create(CreateclubPage);
+    modal.present();
   }
 
 

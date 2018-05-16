@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CirclePage } from '../circle/circle';
 import { ClubPage } from '../club/club';
 import { NotificationsPage } from '../notifications/notifications';
-import { UserPage } from '../user/user';
+import { MyPage } from '../my/my';
 import { HomePage } from '../home/home';
 
 @Component({
@@ -15,7 +15,7 @@ export class TabsPage {
   tab2Root = ClubPage;
   tab3Root = CirclePage;
   tab4Root = NotificationsPage;
-  tab5Root = UserPage;
+  tab5Root = MyPage;
   constructor() {
 
   }

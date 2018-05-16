@@ -1,5 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController, Content, Tabs } from 'ionic-angular';
+import { NavController, Content, Tabs, ModalController } from 'ionic-angular';
+import { CreatecirclePage } from '../createcircle/createcircle';
+
 @Component({
   selector: 'page-circle',
   templateUrl: 'circle.html',
@@ -13,7 +15,8 @@ export class CirclePage {
 
   public circles: any;
   constructor(public navCtrl: NavController,
-    public ngzone: NgZone) {
+    public ngzone: NgZone,
+    public modalCtrl: ModalController) {
 
     this.circles = [
       { "name": "圈子1" },
@@ -48,6 +51,11 @@ export class CirclePage {
   hiddenTabs(p: boolean) {
     let t: Tabs = this.navCtrl.parent;
     t.setTabbarHidden(p);
+  }
+
+  createCircle() {
+    let modal = this.modalCtrl.create(CreatecirclePage);
+    modal.present();
   }
 
 }

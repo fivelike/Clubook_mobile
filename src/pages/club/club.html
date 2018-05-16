@@ -67,7 +67,7 @@
 
   <div [ngSwitch]="club">
     <div *ngSwitchCase="'yours'">
-      <ion-card class="add-club" text-center>
+      <ion-card class="add-club" text-center (click)="createClub()">
           <ion-icon name="add-circle"></ion-icon>
         <div class="card-title">创建社团</div>
       </ion-card>
