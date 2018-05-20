@@ -19,8 +19,8 @@ export class RestProvider {
   }
 
   //post
-  private apiUrlRegister = 'http://clubook.club/api/user/auth';
-  private apiUrlLogin = 'http://clubook.club/api/user/register';
+  private apiUrlLogin = 'http://clubook.club/api/user/auth';
+  private apiUrlRegister = 'http://clubook.club/api/user/register';
   private apiUrlGetInfo = 'http://clubook.club/api/user/getinfo';
   private apiUrlChangeNickName = 'http://clubook.club/api/user/change_nick_name';
 
@@ -31,15 +31,15 @@ export class RestProvider {
    * @returns {Observable<string[]>} 
    * @memberof RestProvider
    */
-  getUserInfo(userid): Observable < string[] >{
-    return this.postUrlReturn(this.apiUrlGetInfo,{
-      "userid":userid
+  getUserInfo(userid): Observable < string[] > {
+    return this.postUrlReturn(this.apiUrlGetInfo, {
+      "userid": userid
     });
   }
 
-  changeNickName(nickname): Observable<string[]>{
-    return this.postUrlReturn(this.apiUrlChangeNickName,{
-      "nickname":nickname
+  changeNickName(nickname): Observable < string[] > {
+    return this.postUrlReturn(this.apiUrlChangeNickName, {
+      "nickname": nickname
     })
   }
   /**
@@ -63,7 +63,7 @@ export class RestProvider {
   /**
    * 根据用户的邮箱和密码进行登陆
    * 
-   * @param {any} email 
+   * @param {any} name 
    * @param {any} password 
    * @returns {Observable<string[]>} 
    * @memberof RestProvider
@@ -114,7 +114,8 @@ export class RestProvider {
    */
   private extractData(res: Response) {
     let body = res.json();
-    return JSON.parse(body) || {};
+    //return JSON.parse(body) || {};
+    return body;
   }
 
   /**
