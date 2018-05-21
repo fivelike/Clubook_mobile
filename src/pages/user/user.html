@@ -7,6 +7,28 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list class="marginTop marginButton">
+    <button ion-item>
+      <!-- <button ion-item (click)="gotoHeadFace()"> -->
+      <ion-avatar item-start>
+        <img src={{headface}}/>
+      </ion-avatar>
+      <h2>修改头像</h2>
+    </button>
+  </ion-list>
 
+  <ion-list class="marginTop">
+    <ion-item>
+      <ion-label>用户昵称</ion-label>
+      <ion-input type="text" [(ngModel)]="nickname"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div padding text-center class="paddingTop">
+    <button ion-button color="primary" block (click)="updateNickName()">保存</button>
+  </div>
+  <div padding text-center class="paddingTop">
+    <button ion-button color="danger" block (click)="logout()">注销</button>
+  </div>
 </ion-content>

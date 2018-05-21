@@ -6,7 +6,9 @@ import {
 } from 'rxjs/Rx';
 import {
   Http,
-  Response
+  Response,
+  Headers,
+  RequestOptions
 } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -15,14 +17,13 @@ import 'rxjs/add/operator/map';
 export class RestProvider {
 
   constructor(public http: Http) {
-    //console.log('Hello RestProvider Provider');
   }
 
   //post
   private apiUrlLogin = 'http://clubook.club/api/user/auth';
   private apiUrlRegister = 'http://clubook.club/api/user/register';
   private apiUrlGetInfo = 'http://clubook.club/api/user/getinfo';
-  private apiUrlChangeNickName = 'http://clubook.club/api/user/change_nick_name';
+  private apiUrlUpdateNickName = 'http://clubook.club/api/user/change_nickname';
 
   /**
    * 根据用户id获取用户信息
@@ -31,16 +32,20 @@ export class RestProvider {
    * @returns {Observable<string[]>} 
    * @memberof RestProvider
    */
-  getUserInfo(userid): Observable < string[] > {
-    return this.postUrlReturn(this.apiUrlGetInfo, {
-      "userid": userid
+  getUserInfo(token): Observable < string[] > {
+    let headers = new Headers({
+      Authorization: "Bearer " + token
     });
+    return this.getUrlReturn(this.apiUrlGetInfo, headers);
   }
 
-  changeNickName(nickname): Observable < string[] > {
-    return this.postUrlReturn(this.apiUrlChangeNickName, {
+  updateNickName(nickname,token): Observable < string[] > {
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.postUrlReturn(this.apiUrlUpdateNickName, {
       "nickname": nickname
-    })
+    },headers);
   }
   /**
    * 根据用户名，密码，邮箱进行注册
@@ -51,12 +56,12 @@ export class RestProvider {
    * @returns {Observable<string[]>} 
    * @memberof RestProvider
    */
-  register(name, password, email): Observable < string[] > {
-    return this,
-    this.postUrlReturn(this.apiUrlRegister, {
+  register(name, password, email,nickname): Observable < string[] > {
+    return this.postUrlReturn(this.apiUrlRegister, {
       "name": name,
       "password": password,
-      "email": email
+      "email": email,
+      "nickname": nickname
     });
   }
 
@@ -84,8 +89,11 @@ export class RestProvider {
    * @returns {Observable<string[]>} 
    * @memberof RestProvider
    */
-  private postUrlReturn(url: string, body: any): Observable < string[] > {
-    return this.http.post(url, body)
+  private postUrlReturn(url: string, body: any,headers?:Headers): Observable < string[] > {
+    let opitins = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post(url, body, opitins)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -98,8 +106,11 @@ export class RestProvider {
    * @returns {Observable<string[]>} 
    * @memberof RestProvider
    */
-  private getUrlReturn(url: string): Observable < string[] > {
-    return this.http.get(url)
+  private getUrlReturn(url: string, headers?:Headers ): Observable < string[] > {
+    let opitins = new RequestOptions({
+      headers: headers
+    });
+    return this.http.get(url, opitins)
       .map(this.extractData)
       .catch(this.handleError);
   }

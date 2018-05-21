@@ -8,10 +8,13 @@
 
 
 <ion-content>
+  <div *ngIf="notLogin">
     <ion-card>
     
       <ion-card-header text-center>
-        <div><img src="assets/imgs/clubook.jpg"></div>
+        <div>
+          <img src="assets/imgs/clubook.jpg">
+        </div>
         登陆Clubook，体验更多功能
       </ion-card-header>
     
@@ -20,5 +23,20 @@
       </ion-card-content>
     
     </ion-card>
+  </div>
+
+    <div *ngIf="logined">
+      <ion-list class="marginTop">
+        <button ion-item (click)="gotoUserPage()">
+          <ion-avatar item-start>
+            <img src={{headface}}/>
+          </ion-avatar>
+          <h2>{{userinfo["name"]}}</h2>
+          <p>查看个人主页或编辑简介</p>
+        </button>
+      </ion-list>
+
+    </div>
+
 </ion-content>
 

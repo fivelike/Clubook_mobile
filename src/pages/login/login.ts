@@ -46,10 +46,9 @@ export class LoginPage extends BaseUI {
     this.rest.login(this.name, this.password)
       .subscribe(
         f => {
-          console.log(f);
           if (f["status_code"] == 666) {
             //处理登陆成功的页面跳转
-            //也可以存储接口返回的token
+            //存储接口返回的token
             this.storage.set('token', f["access_token"]);
             // this.storage.get('token').then((val)=>{
             //   console.log(val);
@@ -57,7 +56,7 @@ export class LoginPage extends BaseUI {
             loading.dismiss();
             this.dismiss();
           } else {
-            console.log(f["status_code"]);
+            //console.log(f["status_code"]);
             loading.dismiss();
             super.showToast(this.toastCtrl, f["message"]);
           }

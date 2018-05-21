@@ -1,25 +1,90 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+  Component
+} from '@angular/core';
+import {
+  NavController,
+  NavParams,
+  LoadingController,
+  ModalController,
+  ToastController,
+  ViewController
+} from 'ionic-angular';
+import {
+  BaseUI
+} from '../../common/baseui';
+import {
+  Storage
+} from '@ionic/storage';
+import {
+  RestProvider
+}
+  from '../../providers/rest/rest';
 
-/**
- * Generated class for the UserPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
 })
-export class UserPage {
+export class UserPage extends BaseUI {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  headface: string = "http://img1.touxiang.cn/uploads/20121212/12-055808_368.jpg";
+  errorMessage: any;
+  nickname: string = "加载中...";
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public loadCtrl: LoadingController,
+    public modalCtrl: ModalController,
+    public rest: RestProvider,
+    public storage: Storage,
+    public toastCtrl: ToastController,
+    public viewCtrl: ViewController) {
+    super();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage');
+  ionViewDidEnter() {
+    this.loadUserPage();
   }
 
+  loadUserPage() {
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        //加载用户数据
+        let loading = super.showLoading(this.loadCtrl, "加载中...");
+        this.rest.getUserInfo(val)
+          .subscribe(userinfo => {
+            this.nickname = userinfo["nickname"];
+            this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
+
+            loading.dismiss();
+          },
+            error => this.errorMessage = <any>error);
+      }
+    });
+  }
+
+  updateNickName() {
+    this.storage.get("token").then((val) => {
+      if (val != null) {
+        let loading = super.showLoading(this.loadCtrl, "修改中...");
+        this.rest.updateNickName(this.nickname,val)
+          .subscribe(
+            f => {
+              if (f["status_code"] == "666") {
+                loading.dismiss();
+                super.showToast(this.toastCtrl, "昵称修改成功！");
+                this.viewCtrl.dismiss();
+              } else {
+                loading.dismiss();
+                super.showToast(this.toastCtrl, f["message"]);
+              }
+            },
+            error => this.errorMessage = <any>error);
+      }
+    });
+  }
+
+
+  logout() {
+    this.storage.remove('token');
+    this.viewCtrl.dismiss();
+  }
 }
