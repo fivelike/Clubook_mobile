@@ -16,6 +16,7 @@ import { CreateclubPage } from '../pages/createclub/createclub';
 import { CreatecirclePage } from '../pages/createcircle/createcircle';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { DetailsPage } from '../pages/details/details';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -26,6 +27,7 @@ import { RestProvider } from '../providers/rest/rest';
   declarations: [
     MyApp,
     HomePage,
+    DetailsPage,
     CirclePage,
     ClubPage,
     NotificationsPage,
@@ -50,6 +52,7 @@ import { RestProvider } from '../providers/rest/rest';
   entryComponents: [
     MyApp,
     HomePage,
+    DetailsPage,
     CirclePage,
     ClubPage,
     NotificationsPage,

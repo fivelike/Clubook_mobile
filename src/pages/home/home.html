@@ -29,7 +29,7 @@
 
 
 
-  <ion-card *ngFor="let p of passages">
+  <ion-card *ngFor="let p of passages" (click)=gotoDetails()>
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/test.jpg">

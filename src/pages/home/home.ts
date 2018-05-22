@@ -1,6 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController,Content, Tabs, ModalController } from 'ionic-angular';
 import { CreatepassagePage } from '../createpassage/createpassage';
+import { DetailsPage } from '../details/details';
 
 @Component({
   selector: 'page-home',
@@ -48,6 +49,11 @@ export class HomePage {
   hiddenTabs(p:boolean){
     let t:Tabs=this.navCtrl.parent;
     t.setTabbarHidden(p);
+  }
+
+  gotoDetails(){
+    //this.navCtrl.push(DetailsPage, { id: questionId });
+    this.navCtrl.push(DetailsPage);
   }
 
 
