@@ -17,6 +17,7 @@ import { CreatecirclePage } from '../pages/createcircle/createcircle';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { DetailsPage } from '../pages/details/details';
+import { CommentPage } from '../pages/comment/comment';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -38,6 +39,7 @@ import { RestProvider } from '../providers/rest/rest';
     CreatecirclePage,
     LoginPage,
     RegisterPage,
+    CommentPage,
     MyPage
   ],
   imports: [
@@ -63,6 +65,7 @@ import { RestProvider } from '../providers/rest/rest';
     CreatecirclePage,
     LoginPage,
     RegisterPage,
+    CommentPage,
     MyPage
   ],
   providers: [

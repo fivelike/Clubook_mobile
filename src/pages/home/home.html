@@ -29,7 +29,7 @@
 
 
 
-  <ion-card *ngFor="let p of passages" (click)=gotoDetails()>
+  <ion-card *ngFor="let p of passages">
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/test.jpg">
@@ -44,7 +44,7 @@
       </p>
     </ion-item>
 
-    <ion-card-content>
+    <ion-card-content  (click)=gotoDetails()>
       <p>ContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummary</p>
     </ion-card-content>
   <ion-row>
@@ -55,7 +55,7 @@
       </button>
     </ion-col>
     <ion-col col-2>
-      <button ion-button icon-left clear color="light-dark">
+      <button ion-button icon-left clear color="light-dark" (click)="showCommentPage()">
         <ion-icon name="text"></ion-icon>
         <div>9</div>
       </button>

@@ -1,3 +1,16 @@
 page-details {
+  .card {
+    margin: 0;
+    margin-bottom: 10px;
+    width: 100%;
 
+    //box-shadow: none;
+  }
+  .card p {
+    margin-top: 10px;
+  }
+  .answer_date {
+    float: right;
+    margin-bottom: 10px;
+  }
 }

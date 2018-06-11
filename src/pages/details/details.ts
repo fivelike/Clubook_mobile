@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { CommentPage } from '../comment/comment';
 
 @Component({
   selector: 'page-details',
@@ -7,11 +8,15 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class DetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public modalCtrl: ModalController) {
+      
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailsPage');
+  showCommentPage() {
+    let modal = this.modalCtrl.create(CommentPage);
+    modal.present();
   }
 
 }

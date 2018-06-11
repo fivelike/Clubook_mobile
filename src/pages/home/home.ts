@@ -2,6 +2,7 @@ import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController,Content, Tabs, ModalController } from 'ionic-angular';
 import { CreatepassagePage } from '../createpassage/createpassage';
 import { DetailsPage } from '../details/details';
+import { CommentPage } from '../comment/comment';
 
 @Component({
   selector: 'page-home',
@@ -59,6 +60,11 @@ export class HomePage {
 
   createPassage(){
     let modal = this.modalCtrl.create(CreatepassagePage);
+    modal.present();
+  }
+
+  showCommentPage(){
+    let modal = this.modalCtrl.create(CommentPage);
     modal.present();
   }
 
