@@ -36,7 +36,7 @@
 
       </ion-avatar>
       <p class="username">Five like
-        <span class="from">
+        <span class="from" (tap)="pushClubDetails()">
           <ion-icon class="from_icon" name="play"></ion-icon>
           &nbsp;{{p.name}}
         </span>

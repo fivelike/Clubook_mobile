@@ -1,6 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController, Content, Tabs, ModalController } from 'ionic-angular';
 import { CreatecirclePage } from '../createcircle/createcircle';
+import { CircledetailsPage } from '../circledetails/circledetails';
 
 @Component({
   selector: 'page-circle',
@@ -47,6 +48,13 @@ export class CirclePage {
       }
     })
   }
+  ionViewWillLeave() {
+    if (!this.display) {
+      this.display = true;
+      this.hiddenTabs(false);
+    }
+  }
+  
   //隐藏tabs
   hiddenTabs(p: boolean) {
     let t: Tabs = this.navCtrl.parent;
@@ -56,6 +64,10 @@ export class CirclePage {
   createCircle() {
     let modal = this.modalCtrl.create(CreatecirclePage);
     modal.present();
+  }
+
+  pushCircleDetails() {
+    this.navCtrl.push(CircledetailsPage);
   }
 
 }

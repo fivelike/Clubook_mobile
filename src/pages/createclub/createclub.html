@@ -1,18 +1,34 @@
-<!--
-  Generated template for the CreateclubPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>createclub</ion-title>
+  <ion-navbar color="clubgreen">
+    <ion-title>创建社团</ion-title>
+        <ion-buttons start>
+          <button ion-button (click)="dismiss()">
+            <span ion-text showWhen="ios">取消</span>
+            <ion-icon name="md-close" showWhen="android"></ion-icon>
+          </button>
+        </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+<ion-list>
+  <ion-item>
+    <ion-label stacked>
+      社团名称
+    </ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>
+      社团描述
+    </ion-label>
+    <ion-textarea type="text" rows="5"></ion-textarea>
+  </ion-item>
+</ion-list>
+<div padding>
+  <button ion-button color="clubgreen" block>创建</button>
+</div>
 </ion-content>

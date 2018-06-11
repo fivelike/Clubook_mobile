@@ -18,6 +18,8 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { DetailsPage } from '../pages/details/details';
 import { CommentPage } from '../pages/comment/comment';
+import { ClubdetailsPage } from '../pages/clubdetails/clubdetails';
+import { CircledetailsPage } from '../pages/circledetails/circledetails';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -40,6 +42,8 @@ import { RestProvider } from '../providers/rest/rest';
     LoginPage,
     RegisterPage,
     CommentPage,
+    ClubdetailsPage,
+    CircledetailsPage,
     MyPage
   ],
   imports: [
@@ -47,6 +51,7 @@ import { RestProvider } from '../providers/rest/rest';
     HttpModule, //全局需要导入HTTP
     IonicStorageModule.forRoot(), //全局定义storage的模块
     IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages:true, //隐藏全部子页面tabs
       backButtonText: "返回",
     })
   ],
@@ -66,6 +71,8 @@ import { RestProvider } from '../providers/rest/rest';
     LoginPage,
     RegisterPage,
     CommentPage,
+    ClubdetailsPage,
+    CircledetailsPage,
     MyPage
   ],
   providers: [

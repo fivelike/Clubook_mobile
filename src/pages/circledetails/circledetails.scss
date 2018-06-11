@@ -1,0 +1,67 @@
+page-circledetails {
+  .card-background-page {
+    ion-card {
+      position: relative;
+      text-align: center;
+      margin-top: 0;
+    }
+    .card-title {
+      position: absolute;
+      top: 20%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+    .card-subtitle {
+      font-size: 1.0em;
+      position: absolute;
+      top: 36%;
+      width: 100%;
+      color: #fff;
+    }
+    .card-subscribe {
+      font-size: 1.0em;
+      position: absolute;
+      top: 46%;
+      width: 100%;
+      padding: 0 10%;
+      color: #fff;
+    }
+    .card-button {
+      position: absolute;
+      width: 100%;
+      bottom: 3%;
+      padding: 0 auto;
+    }
+  }
+  .card {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  .username {
+    font-weight: bold;
+  }
+  .from {
+    margin-left: 10px;
+    color: color($colors, clubgreen);
+    font-weight: 400;
+  }
+  .from_icon {
+    font-size: 1rem;
+  }
+  .time {
+    float: right;
+    font-weight: 300;
+  }
+  .card-content {
+    padding-bottom: 0;
+  }
+  .col {
+    padding-bottom: 0;
+  }
+  .col .button {
+    margin: 0;
+  }
+}

@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar color="clubgreen">
+    <ion-title>小觅音社团主页</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="card-background-page">
+    <ion-card>
+      <img src="assets/imgs/test.jpg" />
+      <div class="card-title">社团名称</div>
+      <div class="card-subtitle">13，023个成员</div>
+      <div class="card-subscribe">这里是社团描述这里是社团描述这里是社团描述这里是社团描述这里是社团描述</div>
+      <div class="card-button">
+        <button ion-button color="clubgreen">加 入</button>
+      </div>
+    </ion-card>
+  </div>
+
+  <ion-card *ngFor="let p of passages">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/test.jpg">
+  
+      </ion-avatar>
+      <p class="username">Five like
+        <span class="time">2天前</span>
+      </p>
+    </ion-item>
+  
+    <ion-card-content (click)=gotoDetails()>
+      <p>ContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummary</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col col-8>
+        <button ion-button icon-left clear color="light-dark">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>19</div>
+        </button>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button icon-left clear color="light-dark" (click)="showCommentPage()">
+          <ion-icon name="text"></ion-icon>
+          <div>9</div>
+        </button>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button clear color="light-dark">
+          <ion-icon name="share"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

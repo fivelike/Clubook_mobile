@@ -1,7 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController, Content, Tabs, ModalController } from 'ionic-angular';
 import { CreateclubPage } from '../createclub/createclub';
-
+import { ClubdetailsPage } from '../clubdetails/clubdetails';
 @Component({
   selector: 'page-club',
   templateUrl: 'club.html',
@@ -46,6 +46,14 @@ export class ClubPage {
       }
     })
   }
+
+  ionViewWillLeave() {
+    if (!this.display) {
+      this.display = true;
+      this.hiddenTabs(false);
+    }
+  }
+  
   //隐藏tabs
   hiddenTabs(p: boolean) {
     let t: Tabs = this.navCtrl.parent;
@@ -57,5 +65,8 @@ export class ClubPage {
     modal.present();
   }
 
+  pushClubDetails() {
+    this.navCtrl.push(ClubdetailsPage);
+  }
 
 }

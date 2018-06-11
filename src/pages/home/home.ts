@@ -3,6 +3,7 @@ import { NavController,Content, Tabs, ModalController } from 'ionic-angular';
 import { CreatepassagePage } from '../createpassage/createpassage';
 import { DetailsPage } from '../details/details';
 import { CommentPage } from '../comment/comment';
+import { ClubdetailsPage } from '../clubdetails/clubdetails';
 
 @Component({
   selector: 'page-home',
@@ -47,6 +48,13 @@ export class HomePage {
     })
   }
 
+  ionViewWillLeave() {
+    if(!this.display){
+      this.display=true;
+      this.hiddenTabs(false);
+    }
+  }
+
   hiddenTabs(p:boolean){
     let t:Tabs=this.navCtrl.parent;
     t.setTabbarHidden(p);
@@ -66,6 +74,10 @@ export class HomePage {
   showCommentPage(){
     let modal = this.modalCtrl.create(CommentPage);
     modal.present();
+  }
+
+  pushClubDetails() {
+    this.navCtrl.push(ClubdetailsPage);
   }
 
 }
