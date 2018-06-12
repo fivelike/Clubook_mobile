@@ -22,6 +22,10 @@
 
 
 <ion-content (ionScroll)="scrollHandler($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-down" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="数据加载中...">
+      </ion-refresher-content>
+    </ion-refresher>
 
   <div [ngSwitch]="club">
     <div *ngSwitchCase="'recommend'">
@@ -37,7 +41,7 @@
           </ion-card-content>
         </div>
         <div class="bottom-button">
-          <button ion-button color="clubgreen" clear>加入</button>
+          <button ion-button color="clubgreen" clear (click)=join(reclub.id)>加入</button>
         </div>
       </ion-card>
 
@@ -47,18 +51,18 @@
   <div [ngSwitch]="club">
     <div *ngSwitchCase="'member'">
 
-      <ion-card *ngFor="let club of clubs">
+      <ion-card *ngFor="let f of memberFeeds">
         <div class="top-image" (tap)="pushClubDetails()">
           <img src="assets/imgs/test.jpg">
         </div>
         <div class="bottom-content" (tap)="pushClubDetails()">
           <ion-card-content>
-            <p class="circle-title">{{club["name"]}}</p>
+            <p class="circle-title">{{f.name}}</p>
             <p class="circle-members">198,300个成员</p>
           </ion-card-content>
         </div>
         <div class="bottom-button">
-          <button ion-button color="clubgreen" clear>加入</button>
+          <button ion-button color="clubgreen" clear>进入</button>
         </div>
       </ion-card>
 
@@ -71,18 +75,18 @@
         <ion-icon name="add-circle"></ion-icon>
         <div class="card-title">创建社团</div>
       </ion-card>
-      <ion-card *ngFor="let club of clubs">
+      <ion-card *ngFor="let f of myFeeds">
         <div class="top-image" (tap)="pushClubDetails()">
           <img src="assets/imgs/test.jpg">
         </div>
         <div class="bottom-content" (tap)="pushClubDetails()">
           <ion-card-content>
-            <p class="circle-title">{{club.name}}</p>
+            <p class="circle-title">{{f.name}}</p>
             <p class="circle-members">198,300个成员</p>
           </ion-card-content>
         </div>
         <div class="bottom-button">
-          <button ion-button color="clubgreen" clear>加入</button>
+          <button ion-button color="clubgreen" clear>进入</button>
         </div>
       </ion-card>
 

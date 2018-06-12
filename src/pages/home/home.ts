@@ -80,4 +80,8 @@ export class HomePage {
     this.navCtrl.push(ClubdetailsPage);
   }
 
+  doRefresh(refresher) {
+    refresher.complete();
+  }
+
 }

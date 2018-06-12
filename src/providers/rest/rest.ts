@@ -25,10 +25,66 @@ export class RestProvider {
   private apiUrlGetInfo = 'http://clubook.club/api/user/getinfo';
   private apiUrlUpdateNickName = 'http://clubook.club/api/user/change_nickname';
   private apiUrlCreateClub = 'http://clubook.club/api/community/create';
-
+  private apiUrlCircleClub = 'http://clubook.club/api/circle/create';
+  private apiUrlWriteArticle ="http://clubook.club/api/article"
   //get
   private apiGetClubList="http://clubook.club/api/community";
   private apiGetClub ="http://clubook.club/api/community/";
+  private apiGetCircleList ="http://clubook.club/api/circle";
+  private apiGetCircle = "http://clubook.club/api/circle/";
+  private apiGetMyGroups ="http://clubook.club/api/user/mygroups";
+  private apiGetClubJoin ="http://clubook.club/api/community/join/";
+  private apiGetCircleJoin = "http://clubook.club/api/circle/join/";
+
+  writeArticle(token,title,body,to){
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.postUrlReturn(this.apiUrlCircleClub, {
+      "title": name,
+      "body": body,
+      "to":to
+    }, headers);
+  }
+  
+  joinClub(token,id){
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.getUrlReturn(this.apiGetClubJoin+id,headers);
+  }
+
+  joinCircle(token, id) {
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.getUrlReturn(this.apiGetCircleJoin + id,headers);
+  }
+  
+  getMyGroups(token){
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.getUrlReturn(this.apiGetMyGroups,headers);
+  }
+
+  createCircle(token, name, brief): Observable<string[]> {
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.postUrlReturn(this.apiUrlCircleClub, {
+      "name": name,
+      "brief": brief
+    }, headers);
+  }
+
+  getCircleList(): Observable<string[]> {
+    return this.getUrlReturn(this.apiGetCircleList);
+  }
+
+  getCircleById(id): Observable<string[]> {
+    return this.getUrlReturn(this.apiGetCircle + id);
+  }
 
   createClub(token, name, brief): Observable<string[]>{
     let headers = new Headers({

@@ -8,6 +8,11 @@
 
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-down" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="数据加载中...">
+      </ion-refresher-content>
+    </ion-refresher>
+    
   <div *ngIf="notLogin">
     <ion-card>
     

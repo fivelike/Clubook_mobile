@@ -18,6 +18,9 @@ import {
   ClubdetailsPage
 } from '../clubdetails/clubdetails';
 import {
+  Storage
+} from '@ionic/storage';
+import {
   BaseUI
 } from '../../common/baseui';
 import {
@@ -33,9 +36,9 @@ export class ClubPage extends BaseUI {
 
   club: string = "recommend";
 
-  public recommendFeeds: any;
-  public memberFeeds: any;
-  public myFeeds: any
+  public recommendFeeds: Array < any >= [];
+  public memberFeeds: Array < any >= [];
+  public myFeeds: Array < any >= []
   public errorMessage: any;
 
   constructor(public navCtrl: NavController,
@@ -43,7 +46,8 @@ export class ClubPage extends BaseUI {
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
     public rest: RestProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public storage: Storage) {
     super();
   }
   ionViewDidLoad() {
@@ -81,12 +85,24 @@ export class ClubPage extends BaseUI {
   }
 
   createClub() {
-    let modal = this.modalCtrl.create(CreateclubPage);
-    modal.present();
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let modal = this.modalCtrl.create(CreateclubPage);
+        //关闭后的回调
+        modal.onDidDismiss(() => {
+          this.Refresh();
+        });
+        modal.present();
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后查看...");
+      }
+    });
   }
 
   pushClubDetails(clubId) {
-    this.navCtrl.push(ClubdetailsPage, {id: clubId});
+    this.navCtrl.push(ClubdetailsPage, {
+      id: clubId
+    });
   }
 
 
@@ -94,17 +110,98 @@ export class ClubPage extends BaseUI {
     let loading = super.showLoading(this.loadingCtrl, "数据加载中...");
     this.rest.getClubList().subscribe(
       f => {
-        if (f["status_code"]==666){
+        if (f["status_code"] == 666) {
           console.log(f);
           this.recommendFeeds = f["communities"];
-        }else{
-          loading.dismiss();
+        } else {
+          //loading.dismiss();
           super.showToast(this.toastCtrl, f["message"]);
         }
         //loading.dismiss();
       },
       error => this.errorMessage = < any > error
     );
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        this.rest.getMyGroups(val).subscribe(
+          f => {
+            if (f["status_code"] == 666) {
+              console.log(f);
+              this.separateFeeds(f["communities"]);
+            } else {
+              //loading.dismiss();
+              super.showToast(this.toastCtrl, f["message"]);
+            }
+            //loading.dismiss();
+          },
+          err => {
+            //console.log(err.substring(0,3));
+            this.errorMessage = < any > err;
+            if (err.substring(0, 3) == "401") {
+              //console.log(1);
+              this.storage.remove('token');
+              //loading.dismiss();
+              super.showToast(this.toastCtrl, "您的登陆信息已过期，请重新登陆。");
+            }
+          }
+        );
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后查看...");
+      }
+    });
+    loading.dismiss();
+  }
+
+  separateFeeds(Feeds: any) {
+    for (let f of Feeds) {
+      if (f.my_role == "creator") {
+        this.myFeeds.push(f);
+      } else {
+        this.memberFeeds.push(f);
+      }
+    }
+  }
+
+  doRefresh(refresher) {
+    this.Refresh();
+    refresher.complete();
+  }
+
+  Refresh() {
+    this.recommendFeeds = [];
+    this.memberFeeds = [];
+    this.myFeeds = [];
+    this.getFeeds();
+  }
+
+  join(id) {
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let loading = super.showLoading(this.loadingCtrl, "加入中...");
+        this.rest.joinClub(val, id).subscribe(
+          f => {
+            if (f["status_code"] == 666) {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "加入成功！");
+            } else {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, f["message"]);
+            }
+            this.Refresh();
+          },
+          err => {
+            this.errorMessage = < any > err;
+            if (err.substring(0, 3) == "401") {
+              this.storage.remove('token');
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "您的登陆信息已过期，请重新登陆。");
+            }
+          }
+        );
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后加入...");
+      }
+    });
   }
 
 }

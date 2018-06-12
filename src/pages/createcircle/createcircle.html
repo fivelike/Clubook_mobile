@@ -20,16 +20,16 @@
     <ion-label stacked>
       圈子名称
     </ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label stacked>
       圈子描述
     </ion-label>
-    <ion-textarea type="text" rows="5"></ion-textarea>
+    <ion-textarea type="text" rows="5" [(ngModel)]="brief"></ion-textarea>
   </ion-item>
 </ion-list>
 <div padding>
-  <button ion-button color="circleblue" block>创建</button>
+  <button ion-button color="circleblue" block (click)="createCircle()">创建</button>
 </div>
 </ion-content>

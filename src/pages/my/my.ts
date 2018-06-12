@@ -50,7 +50,7 @@ export class MyPage extends BaseUI {
   }
 
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     this.loadUserPage();
   }
 
@@ -99,6 +99,11 @@ export class MyPage extends BaseUI {
   gotoUserPage() {
     this.navCtrl.push(UserPage);
 
+  }
+
+  doRefresh(refresher) {
+    this.loadUserPage();
+    refresher.complete();
   }
 
 }
