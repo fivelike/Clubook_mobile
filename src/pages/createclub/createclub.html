@@ -19,16 +19,16 @@
     <ion-label stacked>
       社团名称
     </ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label stacked>
       社团描述
     </ion-label>
-    <ion-textarea type="text" rows="5"></ion-textarea>
+    <ion-textarea type="text" rows="5" [(ngModel)]="brief"></ion-textarea>
   </ion-item>
 </ion-list>
 <div padding>
-  <button ion-button color="clubgreen" block>创建</button>
+  <button ion-button color="clubgreen" block (click)="createClub()">创建</button>
 </div>
 </ion-content>

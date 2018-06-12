@@ -24,11 +24,22 @@ export class RestProvider {
   private apiUrlRegister = 'http://clubook.club/api/user/register';
   private apiUrlGetInfo = 'http://clubook.club/api/user/getinfo';
   private apiUrlUpdateNickName = 'http://clubook.club/api/user/change_nickname';
+  private apiUrlCreateClub = 'http://clubook.club/api/community/create';
 
   //get
   private apiGetClubList="http://clubook.club/api/community";
   private apiGetClub ="http://clubook.club/api/community/";
 
+  createClub(token, name, brief): Observable<string[]>{
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.postUrlReturn(this.apiUrlCreateClub, {
+      "name": name,
+      "brief": brief
+    }, headers);
+  }
+  
   getClubList(): Observable<string[]>{
     return this.getUrlReturn(this.apiGetClubList);
   }
