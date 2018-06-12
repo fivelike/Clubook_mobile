@@ -19,6 +19,7 @@ import {
   RestProvider
 }
 from '../../providers/rest/rest';
+import { HeadfacePage } from '../headface/headface';
 
 @Component({
   selector: 'page-user',
@@ -91,6 +92,10 @@ export class UserPage extends BaseUI {
     });
   }
 
+
+  gotoHeadFace() {
+    this.navCtrl.push(HeadfacePage);
+  }
 
   logout() {
     this.storage.remove('token');

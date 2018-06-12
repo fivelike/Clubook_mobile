@@ -21,10 +21,28 @@ import { CommentPage } from '../pages/comment/comment';
 import { ClubdetailsPage } from '../pages/clubdetails/clubdetails';
 import { CircledetailsPage } from '../pages/circledetails/circledetails';
 import { TabsPage } from '../pages/tabs/tabs';
+import { HeadfacePage } from '../pages/headface/headface';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
+
+
+//导入四个外部加载的插件
+import {
+  Camera
+} from '@ionic-native/camera';
+import {
+  FileTransfer,
+  FileUploadOptions,
+  FileTransferObject
+} from '@ionic-native/file-transfer';
+import {
+  File
+} from '@ionic-native/file';
+import {
+  FilePath
+} from '@ionic-native/file-path';
 
 @NgModule({
   declarations: [
@@ -44,6 +62,7 @@ import { RestProvider } from '../providers/rest/rest';
     CommentPage,
     ClubdetailsPage,
     CircledetailsPage,
+    HeadfacePage,
     MyPage
   ],
   imports: [
@@ -73,13 +92,18 @@ import { RestProvider } from '../providers/rest/rest';
     CommentPage,
     ClubdetailsPage,
     CircledetailsPage,
+    HeadfacePage,
     MyPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider
+    RestProvider,
+    File,
+    FileTransfer,
+    FilePath,
+    Camera,
   ]
 })
 export class AppModule {}
