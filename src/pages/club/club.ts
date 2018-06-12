@@ -1,34 +1,54 @@
-import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController, Content, Tabs, ModalController } from 'ionic-angular';
-import { CreateclubPage } from '../createclub/createclub';
-import { ClubdetailsPage } from '../clubdetails/clubdetails';
+import {
+  Component,
+  NgZone,
+  ViewChild
+} from '@angular/core';
+import {
+  NavController,
+  Content,
+  Tabs,
+  ModalController,
+  LoadingController,
+  ToastController
+} from 'ionic-angular';
+import {
+  CreateclubPage
+} from '../createclub/createclub';
+import {
+  ClubdetailsPage
+} from '../clubdetails/clubdetails';
+import {
+  BaseUI
+} from '../../common/baseui';
+import {
+  RestProvider
+} from '../../providers/rest/rest';
 @Component({
   selector: 'page-club',
   templateUrl: 'club.html',
 })
-export class ClubPage {
+export class ClubPage extends BaseUI {
   @ViewChild(Content) content: Content;
   public display: boolean = true;
 
   club: string = "recommend";
 
-  public clubs:any;
+  public recommendFeeds: any;
+  public memberFeeds: any;
+  public myFeeds: any
+  public errorMessage: any;
+
   constructor(public navCtrl: NavController,
     public ngzone: NgZone,
-    public modalCtrl: ModalController) {
-
-      this.clubs = [
-    { "name": "社团1" },
-    { "name": "社团2" },
-    { "name": "社团3" },
-    { "name": "社团4" },
-    { "name": "社团5" },
-    { "name": "社团6" },
-    { "name": "社团7" },
-    { "name": "社团8" }
-  ];
+    public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,
+    public rest: RestProvider,
+    public toastCtrl: ToastController) {
+    super();
   }
-
+  ionViewDidLoad() {
+    this.getFeeds();
+  }
 
 
   //滑动隐藏
@@ -53,7 +73,7 @@ export class ClubPage {
       this.hiddenTabs(false);
     }
   }
-  
+
   //隐藏tabs
   hiddenTabs(p: boolean) {
     let t: Tabs = this.navCtrl.parent;
@@ -65,8 +85,26 @@ export class ClubPage {
     modal.present();
   }
 
-  pushClubDetails() {
-    this.navCtrl.push(ClubdetailsPage);
+  pushClubDetails(clubId) {
+    this.navCtrl.push(ClubdetailsPage, {id: clubId});
+  }
+
+
+  getFeeds() {
+    let loading = super.showLoading(this.loadingCtrl, "数据加载中...");
+    this.rest.getClubList().subscribe(
+      f => {
+        if (f["status_code"]==666){
+          console.log(f);
+          this.recommendFeeds = f["communities"];
+        }else{
+          loading.dismiss();
+          super.showToast(this.toastCtrl, f["message"]);
+        }
+        //loading.dismiss();
+      },
+      error => this.errorMessage = < any > error
+    );
   }
 
 }

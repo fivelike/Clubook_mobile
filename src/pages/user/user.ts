@@ -18,7 +18,7 @@ import {
 import {
   RestProvider
 }
-  from '../../providers/rest/rest';
+from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-user',
@@ -51,12 +51,12 @@ export class UserPage extends BaseUI {
         let loading = super.showLoading(this.loadCtrl, "加载中...");
         this.rest.getUserInfo(val)
           .subscribe(userinfo => {
-            this.nickname = userinfo["nickname"];
-            this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
+              this.nickname = userinfo["nickname"];
+              this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
 
-            loading.dismiss();
-          },
-            error => this.errorMessage = <any>error);
+              loading.dismiss();
+            },
+            error => this.errorMessage = < any > error);
       }
     });
   }
@@ -65,7 +65,7 @@ export class UserPage extends BaseUI {
     this.storage.get("token").then((val) => {
       if (val != null) {
         let loading = super.showLoading(this.loadCtrl, "修改中...");
-        this.rest.updateNickName(this.nickname,val)
+        this.rest.updateNickName(this.nickname, val)
           .subscribe(
             f => {
               if (f["status_code"] == "666") {
@@ -77,7 +77,16 @@ export class UserPage extends BaseUI {
                 super.showToast(this.toastCtrl, f["message"]);
               }
             },
-            error => this.errorMessage = <any>error);
+            err => {
+              //console.log(err.substring(0,3));
+              this.errorMessage = < any > err;
+              if (err.substring(0, 3) == "401") {
+                //console.log(1);
+                this.storage.remove('token');
+                loading.dismiss();
+                super.showToast(this.toastCtrl, "您的登陆信息已过期，请重新登陆。");
+              }
+            })
       }
     });
   }

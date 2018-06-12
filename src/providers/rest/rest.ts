@@ -25,6 +25,18 @@ export class RestProvider {
   private apiUrlGetInfo = 'http://clubook.club/api/user/getinfo';
   private apiUrlUpdateNickName = 'http://clubook.club/api/user/change_nickname';
 
+  //get
+  private apiGetClubList="http://clubook.club/api/community";
+  private apiGetClub ="http://clubook.club/api/community/";
+
+  getClubList(): Observable<string[]>{
+    return this.getUrlReturn(this.apiGetClubList);
+  }
+
+  getClubById(id): Observable<string[]>{
+    return this.getUrlReturn(this.apiGetClub+id);
+  }
+
   /**
    * 根据用户id获取用户信息
    * 

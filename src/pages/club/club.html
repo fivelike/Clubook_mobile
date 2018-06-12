@@ -1,6 +1,6 @@
 <ion-header no-border>
 
-  <ion-navbar no-border-bottom color="clubgreen" *ngIf = "display">
+  <ion-navbar no-border-bottom color="clubgreen" *ngIf="display">
     <ion-title>社团</ion-title>
   </ion-navbar>
 
@@ -26,13 +26,13 @@
   <div [ngSwitch]="club">
     <div *ngSwitchCase="'recommend'">
 
-      <ion-card *ngFor="let club of clubs">
-        <div class="top-image" (tap)="pushClubDetails()">
+      <ion-card *ngFor="let reclub of recommendFeeds">
+        <div class="top-image" (tap)="pushClubDetails(reclub.id)">
           <img src="assets/imgs/test.jpg">
         </div>
         <div class="bottom-content" (tap)="pushClubDetails()">
           <ion-card-content>
-            <p class="circle-title">{{club.name}}</p>
+            <p class="circle-title">{{reclub.name}}</p>
             <p class="circle-members">198,300个成员</p>
           </ion-card-content>
         </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="bottom-content" (tap)="pushClubDetails()">
           <ion-card-content>
-            <p class="circle-title">{{club.name}}</p>
+            <p class="circle-title">{{club["name"]}}</p>
             <p class="circle-members">198,300个成员</p>
           </ion-card-content>
         </div>
@@ -68,7 +68,7 @@
   <div [ngSwitch]="club">
     <div *ngSwitchCase="'yours'">
       <ion-card class="add-club" text-center (click)="createClub()">
-          <ion-icon name="add-circle"></ion-icon>
+        <ion-icon name="add-circle"></ion-icon>
         <div class="card-title">创建社团</div>
       </ion-card>
       <ion-card *ngFor="let club of clubs">
