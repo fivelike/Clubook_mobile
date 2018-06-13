@@ -36,7 +36,7 @@
     </ion-card-content>
     <ion-row>
       <ion-col col-8>
-        <button ion-button icon-left clear color="light-dark">
+        <button ion-button icon-left clear color="light-dark" (click)=like(p.id,p)>
           <ion-icon name="thumbs-up"></ion-icon>
           <div>{{p.likes}}</div>
         </button>

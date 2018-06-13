@@ -117,5 +117,28 @@ export class ClubdetailsPage extends BaseUI {
     });
   }
 
+  like(id, p) {
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let loading = super.showLoading(this.loadingCtrl, "点赞中...");
+        this.rest.like(val, id).subscribe(
+          f => {
+            if (f["status_code"] == 666) {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "点赞成功！");
+              //console.log(this.passages.indexOf(p));
+              this.passages[this.passages.indexOf(p)].likes++;
+            } else {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, f["message"]);
+            }
+          },
+          error => this.errorMessage = <any>error
+        );
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后点赞...")
+      }
+    });
+  }
 
 }
