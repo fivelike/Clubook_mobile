@@ -35,7 +35,20 @@ export class RestProvider {
   private apiGetMyGroups ="http://clubook.club/api/user/mygroups";
   private apiGetClubJoin ="http://clubook.club/api/community/join/";
   private apiGetCircleJoin = "http://clubook.club/api/circle/join/";
+  private apiGetArticleFeeds ='http://clubook.club/api/article/index';
+  private apiGetClubArtclesFeeds = 'http://clubook.club/api/article/community/';
+  private apiGetCircleArtclesFeeds = 'http://clubook.club/api/article/circle/';
 
+  getPassages(){
+    return this.getUrlReturn(this.apiGetArticleFeeds);
+  }
+  getClubPassages(id){
+    return this.getUrlReturn(this.apiGetClubArtclesFeeds+id);
+  }
+  getCirclePassages(id){
+    return this.getUrlReturn(this.apiGetCircleArtclesFeeds + id);
+  }
+  
   writeArticle(token,title,body,to){
     let headers = new Headers({
       Authorization: "Bearer " + token

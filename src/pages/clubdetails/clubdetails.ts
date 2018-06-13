@@ -28,6 +28,7 @@ export class ClubdetailsPage extends BaseUI {
   public passages: any;
   public clubId: string;
   public club: any;
+  public errorMessage:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -35,50 +36,43 @@ export class ClubdetailsPage extends BaseUI {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController) {
     super();
-    this.passages = [{
-        "name": "社团1"
-      },
-      {
-        "name": "社团2"
-      },
-      {
-        "name": "社团3"
-      },
-      {
-        "name": "社团4"
-      },
-      {
-        "name": "社团5"
-      },
-      {
-        "name": "社团6"
-      },
-      {
-        "name": "社团7"
-      },
-      {
-        "name": "社团8"
-      }
-    ];
   }
 
   ionViewDidLoad() {
     this.clubId = this.navParams.get('id');
-    this.loadClubDate(this.clubId);
+    this.loadClubDate();
+    this.getPassageFeeds();
   }
 
-  loadClubDate(id) {
-    this.rest.getClubById(id)
+  loadClubDate() {
+    this.rest.getClubById(this.clubId)
       .subscribe(
         f => {
+         // console.log(f);
           if (f["status_code"] == 666) {
-            console.log(f["community"]);
             this.club = f["community"];
           } else {
             super.showToast(this.toastCtrl, f["message"]);
           }
         }
       );
+  }
+  getPassageFeeds(){
+    let loading = super.showLoading(this.loadingCtrl, "数据加载中...");
+    this.rest.getClubPassages(this.clubId).subscribe(
+      f => {
+        console.log("获取文章");
+        console.log(f);
+        if (f["status_code"] == 666) {
+          this.passages = f["articles"];
+          loading.dismiss();
+        } else {
+          loading.dismiss();
+          super.showToast(this.toastCtrl, f["message"]);
+        }
+      },
+      error => this.errorMessage = <any>error
+    );
   }
 
   gotoDetails() {

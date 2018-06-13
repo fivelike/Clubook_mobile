@@ -23,44 +23,53 @@ export class CircledetailsPage extends BaseUI{
 
   public circleId:string;
   public circle:any;
-
+  public errorMessage:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
     public rest: RestProvider,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController) {
     super();
-    this.passages = [
-      { "name": "社团1" },
-      { "name": "社团2" },
-      { "name": "社团3" },
-      { "name": "社团4" },
-      { "name": "社团5" },
-      { "name": "社团6" },
-      { "name": "社团7" },
-      { "name": "社团8" }
-    ];
   }
 
   ionViewDidLoad() {
     this.circleId = this.navParams.get('id');
-    this.loadCircleDate(this.circleId);
-
+    this.loadCircleDate();
+    this.getPassageFeeds();
   }
 
-  loadCircleDate(id){
-    this.rest.getCircleById(id)
+  loadCircleDate(){
+    this.rest.getCircleById(this.circleId)
       .subscribe(
         f => {
           if (f["status_code"] == 666) {
-            console.log(f);
             this.circle = f["circle"];
+            console.log(this.circle);
           } else {
             super.showToast(this.toastCtrl, f["message"]);
           }
         }
       );
   }
+
+  getPassageFeeds() {
+    let loading = super.showLoading(this.loadingCtrl, "数据加载中...");
+    this.rest.getCirclePassages(this.circleId).subscribe(
+      f => {
+        console.log("获取文章");
+        console.log(f);
+        if (f["status_code"] == 666) {
+          this.passages = f["articles"];
+          loading.dismiss();
+        } else {
+          loading.dismiss();
+          super.showToast(this.toastCtrl, f["message"]);
+        }
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
+
   gotoDetails() {
     //this.navCtrl.push(DetailsPage, { id: questionId });
     this.navCtrl.push(DetailsPage);

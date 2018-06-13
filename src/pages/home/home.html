@@ -35,26 +35,26 @@
   <ion-card *ngFor="let p of passages">
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/test.jpg">
+        <img src="{{p.user_icon}}">
 
       </ion-avatar>
-      <p class="username">Five like
+      <p class="username">{{p.author_name}}
         <span class="from" (tap)="pushClubDetails()">
           <ion-icon class="from_icon" name="play"></ion-icon>
-          &nbsp;{{p.name}}
+          &nbsp;{{p.owner_name}}
         </span>
-        <span class="time">2天前</span>
+        <span class="time">{{p.created_at}}</span>
       </p>
     </ion-item>
 
     <ion-card-content  (click)=gotoDetails()>
-      <p>ContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummary</p>
+      <p>{{p.body}}</p>
     </ion-card-content>
   <ion-row>
     <ion-col col-8>
       <button ion-button icon-left clear color="light-dark">
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>19</div>
+        <div>{{p.likes}}</div>
       </button>
     </ion-col>
     <ion-col col-2>

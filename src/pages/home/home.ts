@@ -1,9 +1,12 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController, Content, Tabs, ModalController, ToastController } from 'ionic-angular';
+import { NavController, Content, Tabs, ModalController, ToastController,LoadingController } from 'ionic-angular';
 import { CreatepassagePage } from '../createpassage/createpassage';
 import { DetailsPage } from '../details/details';
 import { CommentPage } from '../comment/comment';
 import { ClubdetailsPage } from '../clubdetails/clubdetails';
+import {
+  RestProvider
+} from '../../providers/rest/rest';
 import {
   Storage
 } from '@ionic/storage';
@@ -21,26 +24,39 @@ export class HomePage extends BaseUI{
   public display:boolean = true;
 
   public passages:any;
+  public errorMessage: any;
 
   constructor(public navCtrl: NavController,
   public ngzone:NgZone,
   public modalCtrl:ModalController,
     public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+    public rest: RestProvider,
     public storage: Storage) {
     super();
-    this.passages = [
-      { "name": "社团1" },
-      { "name": "社团2" },
-      { "name": "社团3" },
-      { "name": "社团4" },
-      { "name": "社团5" },
-      { "name": "社团6" },
-      { "name": "社团7" },
-      { "name": "社团8" }
-    ];
+  }
+
+  ionViewDidLoad(){
+    this.getPassageFeeds();
   }
 
 
+  getPassageFeeds(){
+    let loading = super.showLoading(this.loadingCtrl, "数据加载中...");
+    this.rest.getPassages().subscribe(
+      f=>{
+        console.log(f);
+        if(f["status_code"]==666){
+          this.passages = f["articles"];
+          loading.dismiss();
+        }else{
+          loading.dismiss();
+          super.showToast(this.toastCtrl, f["message"]);
+        }
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
 
   scrollHandler(e){
     this.ngzone.run(() => {
@@ -97,6 +113,8 @@ export class HomePage extends BaseUI{
   }
 
   doRefresh(refresher) {
+    this.passages=[];
+    this.getPassageFeeds();
     refresher.complete();
   }
 

@@ -10,49 +10,49 @@
   <div class="card-background-page">
     <ion-card>
       <img src="assets/imgs/test.jpg" />
-      <div class="card-title">circle.name</div>
+      <div class="card-title">{{circle?.name}}</div>
       <div class="card-subtitle">13，023个成员</div>
-      <div class="card-subscribe">circle.berif</div>
+      <div class="card-subscribe">{{circle?.brief}}</div>
       <div class="card-button">
         <button ion-button color="circleblue">加 入</button>
       </div>
     </ion-card>
   </div>
 
-  <ion-card *ngFor="let p of passages">
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/test.jpg">
+<ion-card *ngFor="let p of passages">
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="{{p.user_icon}}">
 
-      </ion-avatar>
-      <p class="username">Five like
-        <span class="time">2天前</span>
-      </p>
-    </ion-item>
+    </ion-avatar>
+    <p class="username">{{p.author_name}}
+      <span class="time">{{p.created_at}}</span>
+    </p>
+  </ion-item>
 
-    <ion-card-content (click)=gotoDetails()>
-      <p>ContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummary</p>
-    </ion-card-content>
-    <ion-row>
-      <ion-col col-8>
-        <button ion-button icon-left clear color="light-dark">
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>19</div>
-        </button>
-      </ion-col>
-      <ion-col col-2>
-        <button ion-button icon-left clear color="light-dark" (click)="showCommentPage()">
-          <ion-icon name="text"></ion-icon>
-          <div>9</div>
-        </button>
-      </ion-col>
-      <ion-col col-2>
-        <button ion-button clear color="light-dark">
-          <ion-icon name="share"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+  <ion-card-content (click)=gotoDetails()>
+    <p>{{p.body}}</p>
+  </ion-card-content>
+  <ion-row>
+    <ion-col col-8>
+      <button ion-button icon-left clear color="light-dark">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>{{p.likes}}</div>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button icon-left clear color="light-dark" (click)="showCommentPage()">
+        <ion-icon name="text"></ion-icon>
+        <div>9</div>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button clear color="light-dark">
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-card>
 
 </ion-content>
 
