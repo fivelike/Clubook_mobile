@@ -11,15 +11,27 @@
       </span></p>
     </div>
     <ion-avatar item-end>
-      <button ion-button small class="submit-button">
+      <button ion-button small class="submit-button" (click)="submit()">
         发&nbsp;布
       </button>
     </ion-avatar>
   </ion-item>
 </ion-header>
 <ion-content>
-
-    <ion-textarea scrollY="true" type="text" rows="10"></ion-textarea>
+<ion-list>
+  <ion-item>
+    <ion-label stacked>
+      文章标题
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>
+      文章内容
+    </ion-label>
+    <ion-textarea type="text" rows="10" [(ngModel)]="body"></ion-textarea>
+  </ion-item>
+</ion-list>
 
 </ion-content>
 <ion-footer>

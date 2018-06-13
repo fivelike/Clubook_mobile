@@ -1,15 +1,21 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController,Content, Tabs, ModalController } from 'ionic-angular';
+import { NavController, Content, Tabs, ModalController, ToastController } from 'ionic-angular';
 import { CreatepassagePage } from '../createpassage/createpassage';
 import { DetailsPage } from '../details/details';
 import { CommentPage } from '../comment/comment';
 import { ClubdetailsPage } from '../clubdetails/clubdetails';
+import {
+  Storage
+} from '@ionic/storage';
+import {
+  BaseUI
+} from '../../common/baseui';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage extends BaseUI{
   @ViewChild(Content) content: Content;
 
   public display:boolean = true;
@@ -18,7 +24,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
   public ngzone:NgZone,
-  public modalCtrl:ModalController) {
+  public modalCtrl:ModalController,
+    public toastCtrl: ToastController,
+    public storage: Storage) {
+    super();
     this.passages = [
       { "name": "社团1" },
       { "name": "社团2" },
@@ -67,8 +76,15 @@ export class HomePage {
 
 
   createPassage(){
-    let modal = this.modalCtrl.create(CreatepassagePage);
-    modal.present();
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let modal = this.modalCtrl.create(CreatepassagePage);
+        modal.present();
+      }else{
+        super.showToast(this.toastCtrl,"请登陆后发布...")
+      }
+    });
+    
   }
 
   showCommentPage(){

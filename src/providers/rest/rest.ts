@@ -26,7 +26,7 @@ export class RestProvider {
   private apiUrlUpdateNickName = 'http://clubook.club/api/user/change_nickname';
   private apiUrlCreateClub = 'http://clubook.club/api/community/create';
   private apiUrlCircleClub = 'http://clubook.club/api/circle/create';
-  private apiUrlWriteArticle ="http://clubook.club/api/article"
+  private apiUrlWriteArticle ="http://clubook.club/api/article/create"
   //get
   private apiGetClubList="http://clubook.club/api/community";
   private apiGetClub ="http://clubook.club/api/community/";
@@ -40,8 +40,8 @@ export class RestProvider {
     let headers = new Headers({
       Authorization: "Bearer " + token
     });
-    return this.postUrlReturn(this.apiUrlCircleClub, {
-      "title": name,
+    return this.postUrlReturn(this.apiUrlWriteArticle, {
+      "title": title,
       "body": body,
       "to":to
     }, headers);

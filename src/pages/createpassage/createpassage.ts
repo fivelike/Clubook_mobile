@@ -22,6 +22,9 @@ export class CreatepassagePage extends BaseUI{
   public circleFeeds:any;
   public submitTo:any;
 
+  public title:string;
+  public body:string;
+
   public errorMessage: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -67,7 +70,7 @@ export class CreatepassagePage extends BaseUI{
           }
         );
       } else {
-        super.showToast(this.toastCtrl, "请登陆后查看...");
+        super.showToast(this.toastCtrl, "请登陆后操作...");
       }
     });
   }
@@ -75,8 +78,8 @@ export class CreatepassagePage extends BaseUI{
   showCheckbox(){
     let alert = this.alertCtrl.create();
     alert.setTitle('你想将消息发布到哪里?');
-    for (var f of this.clubFeeds){
-      if (this.submitTo.includes(f.id)){
+    for (var f of this.clubFeeds.concat(this.circleFeeds)){
+      if (this.submitTo.includes(f)){
         alert.addInput({
           type: 'checkbox',
           label: f.name,
@@ -103,8 +106,49 @@ export class CreatepassagePage extends BaseUI{
     alert.present();
   }
 
+  submit(){
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let loading = super.showLoading(this.loadingCtrl, "发布中...");
+        this.rest.writeArticle(val,this.title,this.body,this.returnTo()).subscribe(
+          f=>{
+            console.log(f);
+            if (f["status_code"] == "666") {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "发布成功！");
+              this.dismiss();
+            } else {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, f["message"]);
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+            if (error.substring(0, 3) == "401") {
+              //console.log(1);
+              this.storage.remove('token');
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "您的登陆信息已过期，请重新登陆。");
+            }
+          }
+        );
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后操作...");
+      }
+    });
+  }
+
   dismiss(){
     this.viewCtrl.dismiss();
     
+  }
+
+  returnTo():any{
+    let to = [];
+    for(let t of this.submitTo){
+      to.push({"id":t.id,"type":t.type});
+    }
+    console.log(to);
+    return to;
   }
 }

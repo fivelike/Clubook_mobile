@@ -49,7 +49,7 @@ export class CircledetailsPage extends BaseUI{
   }
 
   loadCircleDate(id){
-    this.rest.getClubById(id)
+    this.rest.getCircleById(id)
       .subscribe(
         f => {
           if (f["status_code"] == 666) {
