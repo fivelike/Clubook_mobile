@@ -47,7 +47,7 @@
       </p>
     </ion-item>
 
-    <ion-card-content  (click)=gotoDetails()>
+    <ion-card-content  (click)=gotoDetails(p.id)>
       <p>{{p.body}}</p>
     </ion-card-content>
   <ion-row>
@@ -58,7 +58,7 @@
       </button>
     </ion-col>
     <ion-col col-2>
-      <button ion-button icon-left clear color="light-dark" (click)="showCommentPage()">
+      <button ion-button icon-left clear color="light-dark" (click)="showCommentPage(p.id)">
         <ion-icon name="text"></ion-icon>
         <div>9</div>
       </button>

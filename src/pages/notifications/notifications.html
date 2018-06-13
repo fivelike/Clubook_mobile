@@ -8,6 +8,22 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+<ion-list>
+  <ion-item-sliding *ngFor="let m of messages">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{m.icon}}">
+      </ion-avatar>
+      <h2>{{m.title}}</h2>
+      <p>{{m.content}}</p>
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="homered" (click)="delete(m)">
+        <ion-icon name="trash"></ion-icon>
+        删除
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
 </ion-content>

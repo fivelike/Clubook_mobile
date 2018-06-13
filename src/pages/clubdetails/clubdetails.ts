@@ -79,13 +79,19 @@ export class ClubdetailsPage extends BaseUI {
     );
   }
 
-  gotoDetails() {
-    //this.navCtrl.push(DetailsPage, { id: questionId });
-    this.navCtrl.push(DetailsPage);
+  gotoDetails(id) {
+    //console.log(id);
+    this.navCtrl.push(DetailsPage,{id:id});
   }
-  showCommentPage() {
-    let modal = this.modalCtrl.create(CommentPage);
-    modal.present();
+  showCommentPage(id) {
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let modal = this.modalCtrl.create(CommentPage, { id: id });
+        modal.present();
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后评论...");
+      }
+    });
   }
 
   join() {

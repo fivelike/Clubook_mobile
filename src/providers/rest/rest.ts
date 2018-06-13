@@ -26,7 +26,8 @@ export class RestProvider {
   private apiUrlUpdateNickName = 'http://clubook.club/api/user/change_nickname';
   private apiUrlCreateClub = 'http://clubook.club/api/community/create';
   private apiUrlCircleClub = 'http://clubook.club/api/circle/create';
-  private apiUrlWriteArticle ="http://clubook.club/api/article/create"
+  private apiUrlWriteArticle ="http://clubook.club/api/article/create";
+  private apiUrlCreateComment = 'http://clubook.club/api/article/comment';
   //get
   private apiGetClubList="http://clubook.club/api/community";
   private apiGetClub ="http://clubook.club/api/community/";
@@ -39,24 +40,39 @@ export class RestProvider {
   private apiGetClubArtclesFeeds = 'http://clubook.club/api/article/community/';
   private apiGetCircleArtclesFeeds = 'http://clubook.club/api/article/circle/';
   private apiUrlLike = "http://clubook.club/api/article/like/";
+  private apiGetActicleById = 'http://clubook.club/api/article/';
 
-  like(token,id){
+  getArticleById(id): Observable<string[]>{
+    return this.getUrlReturn(this.apiGetActicleById+id);
+  }
+  
+  createComment(token,id,content): Observable<string[]>{
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.postUrlReturn(this.apiUrlCreateComment,{
+      "article_id": id,
+      "body": content
+    },headers);
+  }
+
+  like(token, id): Observable<string[]>{
     let headers = new Headers({
       Authorization: "Bearer " + token
     });
     return this.getUrlReturn(this.apiUrlLike + id, headers);
   }
-  getPassages(){
+  getPassages(): Observable<string[]>{
     return this.getUrlReturn(this.apiGetArticleFeeds);
   }
-  getClubPassages(id){
+  getClubPassages(id): Observable<string[]>{
     return this.getUrlReturn(this.apiGetClubArtclesFeeds+id);
   }
-  getCirclePassages(id){
+  getCirclePassages(id): Observable<string[]>{
     return this.getUrlReturn(this.apiGetCircleArtclesFeeds + id);
   }
 
-  writeArticle(token,title,body,to){
+  writeArticle(token, title, body, to): Observable<string[]>{
     let headers = new Headers({
       Authorization: "Bearer " + token
     });
@@ -67,21 +83,21 @@ export class RestProvider {
     }, headers);
   }
   
-  joinClub(token,id){
+  joinClub(token, id): Observable<string[]>{
     let headers = new Headers({
       Authorization: "Bearer " + token
     });
     return this.getUrlReturn(this.apiGetClubJoin+id,headers);
   }
 
-  joinCircle(token, id) {
+  joinCircle(token, id): Observable<string[]> {
     let headers = new Headers({
       Authorization: "Bearer " + token
     });
     return this.getUrlReturn(this.apiGetCircleJoin + id,headers);
   }
   
-  getMyGroups(token){
+  getMyGroups(token): Observable<string[]>{
     let headers = new Headers({
       Authorization: "Bearer " + token
     });

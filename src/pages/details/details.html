@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>文章详情</ion-title>
+    <ion-title>{{passage?.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,14 +11,13 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-       ContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummaryContentSummary
-  
+       {{passage?.body}}
     </ion-card-content>
     <ion-row>
       <ion-col col-8>
         <button ion-button icon-left clear color="light-dark">
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>19</div>
+          <div>{{passage?.likes}}</div>
         </button>
       </ion-col>
       <ion-col col-2>
@@ -36,34 +35,20 @@
   </ion-card>
 
 
-  <ion-card>
+  <ion-card *ngFor="let c of comments">
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/test.jpg">
+        <img src="{{c.user_icon}}">
       </ion-avatar>
-      <p>nickname
+      <p>{{c.name}}
       </p>
     </ion-item>
   
     <ion-card-content>
-      <p>评论内容评论内容评论内容评论内容评论内容</p>
-      <p class="answer_date">4小时前</p>
+      <p>{{c.body}}</p>
+      <p class="answer_date">{{c.created_at}}</p>
     </ion-card-content>
   
   </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="assets/imgs/test.jpg">
-        </ion-avatar>
-        <p>nickname
-        </p>
-      </ion-item>
-    
-      <ion-card-content>
-        <p>评论内容评论内容评论内容评论内容评论内容</p>
-        <p class="answer_date">4小时前</p>
-      </ion-card-content>
-    
-    </ion-card>
+
 </ion-content>
