@@ -23,9 +23,9 @@ import {
 import {
   BaseUI
 } from '../../common/baseui';
-// import {
-//   UserdatalistPage
-// } from '../userdatalist/userdatalist';
+import {
+  UserdatalistPage
+} from '../userdatalist/userdatalist';
 
 
 @Component({
@@ -104,6 +104,12 @@ export class MyPage extends BaseUI {
   doRefresh(refresher) {
     this.loadUserPage();
     refresher.complete();
+  }
+
+  gotoDataList(type) {
+    this.navCtrl.push(UserdatalistPage, {
+      "dataType": type
+    });
   }
 
 }

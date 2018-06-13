@@ -41,6 +41,38 @@
         </button>
       </ion-list>
 
+
+          <ion-list class="marginTop">
+            <ion-list-header>我的clubook</ion-list-header>
+            <button ion-item (click)="gotoDataList('write')">
+              <ion-icon name="paper" item-left color="primary"></ion-icon>
+              <ion-label>我的文章</ion-label>
+            </button>
+            <button ion-item (click)="gotoDataList('like')">
+              <ion-icon name="thumbs-up" item-left color="homered"></ion-icon>
+              <ion-label>我的点赞</ion-label>
+            </button>
+            <button ion-item (click)="gotoDataList('comment')">
+              <ion-icon name="disc" item-left color="secondary"></ion-icon>
+              <ion-label>我的评论</ion-label>
+            </button>
+          </ion-list>
+
+              <ion-list class="marginTop">
+                <ion-list-header>设置</ion-list-header>
+                <ion-item>
+                  <ion-icon name="cloudy-night" item-left color="purple"></ion-icon>
+                  <ion-label>夜间模式</ion-label>
+                  <ion-toggle color="purple"></ion-toggle>
+                </ion-item>
+              
+                <button ion-item>
+                  <ion-icon name="code-working" item-left color="dark"></ion-icon>
+                  <ion-label>关于Clubook</ion-label>
+                </button>
+              
+              </ion-list>
+
     </div>
 
 </ion-content>

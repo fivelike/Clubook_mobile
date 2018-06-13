@@ -22,11 +22,13 @@ import { ClubdetailsPage } from '../pages/clubdetails/clubdetails';
 import { CircledetailsPage } from '../pages/circledetails/circledetails';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HeadfacePage } from '../pages/headface/headface';
+import { UserdatalistPage } from '../pages/userdatalist/userdatalist';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 
+import { ComponentsModule } from '../components/components.module';
 
 //导入四个外部加载的插件
 import {
@@ -63,10 +65,12 @@ import {
     ClubdetailsPage,
     CircledetailsPage,
     HeadfacePage,
+    UserdatalistPage,
     MyPage
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     HttpModule, //全局需要导入HTTP
     IonicStorageModule.forRoot(), //全局定义storage的模块
     IonicModule.forRoot(MyApp, {
@@ -93,6 +97,7 @@ import {
     ClubdetailsPage,
     CircledetailsPage,
     HeadfacePage,
+    UserdatalistPage,
     MyPage
   ],
   providers: [
