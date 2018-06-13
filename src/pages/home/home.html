@@ -39,7 +39,7 @@
 
       </ion-avatar>
       <p class="username">{{p.author_name}}
-        <span class="from" (tap)="pushClubDetails()">
+        <span class="from" (tap)="pushClubDetails(p.owner_type,p.id)">
           <ion-icon class="from_icon" name="play"></ion-icon>
           &nbsp;{{p.owner_name}}
         </span>
@@ -52,7 +52,7 @@
     </ion-card-content>
   <ion-row>
     <ion-col col-8>
-      <button ion-button icon-left clear color="light-dark">
+      <button ion-button icon-left clear color="light-dark" (click)=like(p.id,p)>
         <ion-icon name="thumbs-up"></ion-icon>
         <div>{{p.likes}}</div>
       </button>

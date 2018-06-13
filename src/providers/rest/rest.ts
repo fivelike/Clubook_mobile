@@ -38,7 +38,14 @@ export class RestProvider {
   private apiGetArticleFeeds ='http://clubook.club/api/article/index';
   private apiGetClubArtclesFeeds = 'http://clubook.club/api/article/community/';
   private apiGetCircleArtclesFeeds = 'http://clubook.club/api/article/circle/';
+  private apiUrlLike = "http://clubook.club/api/article/like/";
 
+  like(token,id){
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.getUrlReturn(this.apiUrlLike + id, headers);
+  }
   getPassages(){
     return this.getUrlReturn(this.apiGetArticleFeeds);
   }
@@ -48,7 +55,7 @@ export class RestProvider {
   getCirclePassages(id){
     return this.getUrlReturn(this.apiGetCircleArtclesFeeds + id);
   }
-  
+
   writeArticle(token,title,body,to){
     let headers = new Headers({
       Authorization: "Bearer " + token

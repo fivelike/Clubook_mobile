@@ -14,6 +14,10 @@ import {
 import {
   RestProvider
 } from '../../providers/rest/rest';
+import {
+  Storage
+} from '@ionic/storage';
+
 @Component({
   selector: 'page-circledetails',
   templateUrl: 'circledetails.html',
@@ -28,7 +32,8 @@ export class CircledetailsPage extends BaseUI{
     public modalCtrl: ModalController,
     public rest: RestProvider,
     public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public storage: Storage) {
     super();
   }
 
@@ -77,6 +82,35 @@ export class CircledetailsPage extends BaseUI{
   showCommentPage() {
     let modal = this.modalCtrl.create(CommentPage);
     modal.present();
+  }
+
+  join() {
+    this.storage.get('token').then((val) => {
+      if (val != null) {
+        let loading = super.showLoading(this.loadingCtrl, "加入中...");
+        this.rest.joinClub(val, this.circleId).subscribe(
+          f => {
+            if (f["status_code"] == 666) {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "加入成功！");
+            } else {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, f["message"]);
+            }
+          },
+          err => {
+            this.errorMessage = <any>err;
+            if (err.substring(0, 3) == "401") {
+              this.storage.remove('token');
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "您的登陆信息已过期，请重新登陆。");
+            }
+          }
+        );
+      } else {
+        super.showToast(this.toastCtrl, "请登陆后加入...");
+      }
+    });
   }
 
 }

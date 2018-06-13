@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="clubgreen">
-    <ion-title>小觅音社团主页</ion-title>
+    <ion-title>{{club?.name}}的主页</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,11 +11,11 @@
   <div class="card-background-page">
     <ion-card>
       <img src="assets/imgs/test.jpg" />
-      <div class="card-title">club.name</div>
+      <div class="card-title">{{club?.name}}</div>
       <div class="card-subtitle">13，023个成员</div>
-      <div class="card-subscribe">club.brief</div>
+      <div class="card-subscribe">{{club?.brief}}</div>
       <div class="card-button">
-        <button ion-button color="clubgreen">加 入</button>
+        <button ion-button color="clubgreen" (click)="join()">加 入</button>
       </div>
     </ion-card>
   </div>

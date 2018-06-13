@@ -4,6 +4,7 @@ import { CreatepassagePage } from '../createpassage/createpassage';
 import { DetailsPage } from '../details/details';
 import { CommentPage } from '../comment/comment';
 import { ClubdetailsPage } from '../clubdetails/clubdetails';
+import { CircledetailsPage } from '../circledetails/circledetails';
 import {
   RestProvider
 } from '../../providers/rest/rest';
@@ -97,7 +98,7 @@ export class HomePage extends BaseUI{
         let modal = this.modalCtrl.create(CreatepassagePage);
         modal.present();
       }else{
-        super.showToast(this.toastCtrl,"请登陆后发布...")
+        super.showToast(this.toastCtrl,"请登陆后发布...");
       }
     });
     
@@ -108,14 +109,43 @@ export class HomePage extends BaseUI{
     modal.present();
   }
 
-  pushClubDetails() {
-    this.navCtrl.push(ClubdetailsPage);
+  pushClubDetails(type,id) {
+    if (type =="community"){
+      this.navCtrl.push(ClubdetailsPage,{id:id});
+    } else if (type == "circle"){
+      this.navCtrl.push(CircledetailsPage,{ id: id });
+    }
+    
   }
 
   doRefresh(refresher) {
     this.passages=[];
     this.getPassageFeeds();
     refresher.complete();
+  }
+
+  like(id,p){
+    this.storage.get('token').then((val) => {
+      if(val!=null){
+        let loading = super.showLoading(this.loadingCtrl, "点赞中...");
+        this.rest.like(val,id).subscribe(
+          f=>{
+            if(f["status_code"]==666){
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "点赞成功！");
+              //console.log(this.passages.indexOf(p));
+              this.passages[this.passages.indexOf(p)].likes++;
+            }else{
+              loading.dismiss();
+              super.showToast(this.toastCtrl, f["message"]);
+            }
+          },
+          error => this.errorMessage = <any>error
+        );
+      }else{
+        super.showToast(this.toastCtrl, "请登陆后点赞...")
+      }
+    });
   }
 
 }
