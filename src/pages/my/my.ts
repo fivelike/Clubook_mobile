@@ -74,6 +74,8 @@ export class MyPage extends BaseUI {
 
             this.userinfo = userinfo;
             this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
+            this.storage.set('headface', this.headface);
+            this.storage.set('username', userinfo["name"]);
             this.notLogin = false;
             this.logined = true;
             loading.dismiss();

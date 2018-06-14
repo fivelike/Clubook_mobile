@@ -26,6 +26,8 @@ export class CreatepassagePage extends BaseUI{
   public body:string;
 
   public errorMessage: any;
+  headface: string = "assets/imgs/test.jpg";
+  username: string = "发布文章";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl:ViewController,
@@ -40,6 +42,22 @@ export class CreatepassagePage extends BaseUI{
 
   ionViewDidLoad() {
     this.getGroups()
+  }
+
+
+  ionViewDidEnter() {
+    this.storage.get('username').then((val) => {
+      if(val!=null){
+        //console.log(val);
+        this.username = val;
+      }
+    });
+    this.storage.get('headface').then((val) => {
+      if (val != null) {
+        //console.log(val);
+        this.headface = val;
+      }
+    });
   }
 
   getGroups(){
@@ -107,6 +125,18 @@ export class CreatepassagePage extends BaseUI{
   }
 
   submit(){
+    if(this.title==""){
+      super.showToast(this.toastCtrl, "标题不能为空...");
+      return;
+    }
+    if (this.body == "") {
+      super.showToast(this.toastCtrl, "内容不能为空...");
+      return;
+    }
+    if (this.submitTo.length == 0) {
+      super.showToast(this.toastCtrl, "请选择发布可见位置...");
+      return;
+    }
     this.storage.get('token').then((val) => {
       if (val != null) {
         let loading = super.showLoading(this.loadingCtrl, "发布中...");

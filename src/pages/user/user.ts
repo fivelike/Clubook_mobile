@@ -54,7 +54,8 @@ export class UserPage extends BaseUI {
           .subscribe(userinfo => {
             this.nickname = userinfo["name"];
               this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
-
+            this.storage.set('headface', this.headface);
+            this.storage.set('username', userinfo["name"]);
               loading.dismiss();
             },
             error => this.errorMessage = < any > error);
@@ -99,6 +100,8 @@ export class UserPage extends BaseUI {
 
   logout() {
     this.storage.remove('token');
+    this.storage.remove('headface');
+    this.storage.remove('username');    
     this.viewCtrl.dismiss();
   }
 }

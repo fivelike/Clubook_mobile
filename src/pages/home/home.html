@@ -19,7 +19,7 @@
   <ion-card (click)="createPassage()">
     <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/test.jpg">
+        <img src="{{headface}}">
       </ion-avatar>
       <p>你有什么新鲜事想要分享吗？</p>
       <ion-avatar item-end>
@@ -43,7 +43,7 @@
           <ion-icon class="from_icon" name="play"></ion-icon>
           &nbsp;{{p.owner_name}}
         </span>
-        <span class="time">{{p.created_at}}</span>
+        <span class="time">{{p.created_at| date:"yyyy-MM-dd  HH:mm"}}</span>
       </p>
     </ion-item>
 

@@ -26,6 +26,9 @@ export class HomePage extends BaseUI{
 
   public passages:any;
   public errorMessage: any;
+  
+  headface: string = "assets/imgs/test.jpg";
+
 
   constructor(public navCtrl: NavController,
   public ngzone:NgZone,
@@ -35,6 +38,14 @@ export class HomePage extends BaseUI{
     public rest: RestProvider,
     public storage: Storage) {
     super();
+  }
+
+  ionViewDidEnter(){
+    this.storage.get('headface').then((val)=>{
+      if(val!=null){
+        this.headface = val;
+      }
+    });
   }
 
   ionViewDidLoad(){
