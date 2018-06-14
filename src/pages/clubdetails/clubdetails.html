@@ -10,7 +10,7 @@
 <ion-content>
   <div class="card-background-page">
     <ion-card>
-      <img src="assets/imgs/test.jpg" />
+      <img src="{{club?.icon}}" />
       <div class="card-title">{{club?.name}}</div>
       <div class="card-subtitle">{{club?.member_count}}个成员</div>
       <div class="card-subscribe">{{club?.brief}}</div>
@@ -32,7 +32,7 @@
     </ion-item>
   
     <ion-card-content (click)=gotoDetails(p.id)>
-      <p>{{p.body}}</p>
+      <p class="part">{{p.body}}</p>
     </ion-card-content>
     <ion-row>
       <ion-col col-8>

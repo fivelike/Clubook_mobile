@@ -33,7 +33,7 @@
 
       <ion-card *ngFor="let recircle of recommendFeeds">
         <div class="top-image" (tap)="pushCircleDetails(recircle.id)">
-          <img src="assets/imgs/test.jpg">
+          <img src="{{recircle.icon}}">
         </div>
         <div class="bottom-content" (tap)="pushCircleDetails(recircle.id)">
           <ion-card-content>
@@ -54,12 +54,12 @@
 
       <ion-card *ngFor="let f of memberFeeds">
         <div class="top-image" (tap)="pushCircleDetails(f.id)">
-          <img src="assets/imgs/test.jpg">
+          <img src="{{f.icon}}">
         </div>
         <div class="bottom-content" (tap)="pushCircleDetails(f.id)">
           <ion-card-content>
             <p class="circle-title">{{f.name}}</p>
-            <p class="circle-members">{{p.member_count}}个成员</p>
+            <p class="circle-members">{{f.member_count}}个成员</p>
           </ion-card-content>
         </div>
         <div class="bottom-button">
@@ -78,7 +78,7 @@
       </ion-card>
       <ion-card *ngFor="let f of myFeeds">
         <div class="top-image" (tap)="pushCircleDetails(f.id)">
-          <img src="assets/imgs/test.jpg">
+          <img src="{{f.icon}}">
         </div>
         <div class="bottom-content" (tap)="pushCircleDetails(f.id)">
           <ion-card-content>

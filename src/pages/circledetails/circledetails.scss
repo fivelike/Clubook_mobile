@@ -64,4 +64,10 @@ page-circledetails {
   .col .button {
     margin: 0;
   }
+  .part {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
 }

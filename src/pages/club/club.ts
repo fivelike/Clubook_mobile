@@ -35,7 +35,7 @@ export class ClubPage extends BaseUI {
   public display: boolean = true;
 
   club: string = "recommend";
-
+  icon: string = "assets/imgs/test.jpg";
   public recommendFeeds: Array < any >= [];
   public memberFeeds: Array < any >= [];
   public myFeeds: Array < any >= []

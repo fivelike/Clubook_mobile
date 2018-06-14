@@ -31,6 +31,7 @@ export class ClubdetailsPage extends BaseUI {
   public passages: any;
   public clubId: string;
   public club: any;
+  icon: string = "assets/imgs/test.jpg";
   public errorMessage:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,

@@ -32,7 +32,7 @@
 
       <ion-card *ngFor="let reclub of recommendFeeds">
         <div class="top-image" (tap)="pushClubDetails(reclub.id)">
-          <img src="assets/imgs/test.jpg">
+          <img src="{{reclub.icon}}">
         </div>
         <div class="bottom-content" (tap)="pushClubDetails(reclub.id)">
           <ion-card-content>
@@ -53,7 +53,7 @@
 
       <ion-card *ngFor="let f of memberFeeds">
         <div class="top-image" (tap)="pushClubDetails(f.id)">
-          <img src="assets/imgs/test.jpg">
+          <img src="{{f.icon}}">
         </div>
         <div class="bottom-content" (tap)="pushClubDetails(f.id)">
           <ion-card-content>
@@ -77,7 +77,7 @@
       </ion-card>
       <ion-card *ngFor="let f of myFeeds">
         <div class="top-image" (tap)="pushClubDetails(f.id)">
-          <img src="assets/imgs/test.jpg">
+          <img src="{{f.icon}}">
         </div>
         <div class="bottom-content" (tap)="pushClubDetails(f.id)">
           <ion-card-content>

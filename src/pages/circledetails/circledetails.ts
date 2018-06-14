@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {
+  Component
+} from '@angular/core';
 import {
   NavController,
   NavParams,
@@ -6,8 +8,12 @@ import {
   ToastController,
   LoadingController
 } from 'ionic-angular';
-import { CommentPage } from '../comment/comment';
-import { DetailsPage } from '../details/details'
+import {
+  CommentPage
+} from '../comment/comment';
+import {
+  DetailsPage
+} from '../details/details'
 import {
   BaseUI
 } from '../../common/baseui';
@@ -22,12 +28,14 @@ import {
   selector: 'page-circledetails',
   templateUrl: 'circledetails.html',
 })
-export class CircledetailsPage extends BaseUI{
+export class CircledetailsPage extends BaseUI {
   public passages: any;
 
-  public circleId:string;
-  public circle:any;
-  public errorMessage:any;
+  public circleId: string;
+  public circle: any;
+  public errorMessage: any;
+  icon: string = "assets/imgs/test.jpg";
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
     public rest: RestProvider,
@@ -43,7 +51,7 @@ export class CircledetailsPage extends BaseUI{
     this.getPassageFeeds();
   }
 
-  loadCircleDate(){
+  loadCircleDate() {
     this.rest.getCircleById(this.circleId)
       .subscribe(
         f => {
@@ -71,17 +79,21 @@ export class CircledetailsPage extends BaseUI{
           super.showToast(this.toastCtrl, f["message"]);
         }
       },
-      error => this.errorMessage = <any>error
+      error => this.errorMessage = < any > error
     );
   }
 
   gotoDetails(id) {
-    this.navCtrl.push(DetailsPage, { id: id });
+    this.navCtrl.push(DetailsPage, {
+      id: id
+    });
   }
   showCommentPage(id) {
     this.storage.get('token').then((val) => {
       if (val != null) {
-        let modal = this.modalCtrl.create(CommentPage, { id: id });
+        let modal = this.modalCtrl.create(CommentPage, {
+          id: id
+        });
         modal.present();
       } else {
         super.showToast(this.toastCtrl, "请登陆后评论...");
@@ -104,7 +116,7 @@ export class CircledetailsPage extends BaseUI{
             }
           },
           err => {
-            this.errorMessage = <any>err;
+            this.errorMessage = < any > err;
             if (err.substring(0, 3) == "401") {
               this.storage.remove('token');
               loading.dismiss();
@@ -134,7 +146,7 @@ export class CircledetailsPage extends BaseUI{
               super.showToast(this.toastCtrl, f["message"]);
             }
           },
-          error => this.errorMessage = <any>error
+          error => this.errorMessage = < any > error
         );
       } else {
         super.showToast(this.toastCtrl, "请登陆后点赞...")

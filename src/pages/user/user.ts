@@ -52,10 +52,10 @@ export class UserPage extends BaseUI {
         let loading = super.showLoading(this.loadCtrl, "加载中...");
         this.rest.getUserInfo(val)
           .subscribe(userinfo => {
-            this.nickname = userinfo["name"];
+            this.nickname = userinfo["nickname"];
               this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
             this.storage.set('headface', this.headface);
-            this.storage.set('username', userinfo["name"]);
+            this.storage.set('username', userinfo["nickname"]);
               loading.dismiss();
             },
             error => this.errorMessage = < any > error);
