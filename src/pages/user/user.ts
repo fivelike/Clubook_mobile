@@ -27,7 +27,7 @@ import { HeadfacePage } from '../headface/headface';
 })
 export class UserPage extends BaseUI {
 
-  headface: string = "http://img1.touxiang.cn/uploads/20121212/12-055808_368.jpg";
+  headface: string = "assets/imgs/clubook.jpg";
   errorMessage: any;
   nickname: string = "加载中...";
 
@@ -52,7 +52,7 @@ export class UserPage extends BaseUI {
         let loading = super.showLoading(this.loadCtrl, "加载中...");
         this.rest.getUserInfo(val)
           .subscribe(userinfo => {
-              this.nickname = userinfo["nickname"];
+            this.nickname = userinfo["name"];
               this.headface = userinfo["IconUrl"] + "?" + (new Date()).valueOf(); //加后缀参数防止缓存
 
               loading.dismiss();

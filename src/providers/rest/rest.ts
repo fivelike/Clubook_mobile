@@ -41,6 +41,14 @@ export class RestProvider {
   private apiGetCircleArtclesFeeds = 'http://clubook.club/api/article/circle/';
   private apiUrlLike = "http://clubook.club/api/article/like/";
   private apiGetActicleById = 'http://clubook.club/api/article/';
+  private apiGetMyList ="http://clubook.club/api/user/footprints";
+
+  getMyList(token): Observable<string[]>{
+    let headers = new Headers({
+      Authorization: "Bearer " + token
+    });
+    return this.getUrlReturn(this.apiGetMyList,headers);
+  }
 
   getArticleById(id): Observable<string[]>{
     return this.getUrlReturn(this.apiGetActicleById+id);

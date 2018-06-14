@@ -15,15 +15,15 @@
     </ion-card-content>
     <ion-row>
       <ion-col col-8>
-        <button ion-button icon-left clear color="light-dark">
+        <button ion-button icon-left clear color="light-dark" (click)=like(passage.id)>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{passage?.likes}}</div>
+          <div>{{likes}}</div>
         </button>
       </ion-col>
       <ion-col col-2>
         <button ion-button icon-left clear color="light-dark" (click)="showCommentPage()">
           <ion-icon name="text"></ion-icon>
-          <div>9</div>
+          <div>{{passage?.comments_count}}</div>
         </button>
       </ion-col>
       <ion-col col-2>

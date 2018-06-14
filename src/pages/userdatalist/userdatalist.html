@@ -8,5 +8,10 @@
 
 
 <ion-content>
-  <my-list datatype="{{dataType}}"></my-list>
+  <ion-list>
+      <ion-item *ngFor="let l of list" (click)="gotoDetails(l.id)">
+        <h2>{{l.title}}</h2>
+        <p>{{l.created_at}}</p>
+      </ion-item>
+  </ion-list>
 </ion-content>

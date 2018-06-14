@@ -11,7 +11,7 @@
     <ion-card>
       <img src="assets/imgs/test.jpg" />
       <div class="card-title">{{circle?.name}}</div>
-      <div class="card-subtitle">13，023个成员</div>
+      <div class="card-subtitle">{{circle?.member_count}}个成员</div>
       <div class="card-subscribe">{{circle?.brief}}</div>
       <div class="card-button">
         <button ion-button color="circleblue" (click)="join()">加 入</button>
@@ -43,7 +43,7 @@
     <ion-col col-2>
       <button ion-button icon-left clear color="light-dark" (click)="showCommentPage(p.id)">
         <ion-icon name="text"></ion-icon>
-        <div>9</div>
+        <div>{{p.comments_count}}</div>
       </button>
     </ion-col>
     <ion-col col-2>
