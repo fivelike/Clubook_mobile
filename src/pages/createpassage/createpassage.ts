@@ -125,11 +125,11 @@ export class CreatepassagePage extends BaseUI{
   }
 
   submit(){
-    if(this.title==""){
+    if(this.title==null){
       super.showToast(this.toastCtrl, "标题不能为空...");
       return;
     }
-    if (this.body == "") {
+    if (this.body ==null) {
       super.showToast(this.toastCtrl, "内容不能为空...");
       return;
     }

@@ -44,6 +44,10 @@ export class CommentPage extends BaseUI {
   }
 
   submit() {
+    if (this.content == null) {
+      super.showToast(this.toastCtrl, "评论内容不能为空...");
+      return;
+    }
     this.storage.get("token").then((val) => {
         if (val !== null) {
           var loading = super.showLoading(this.loadingCtrl, "发表中...");

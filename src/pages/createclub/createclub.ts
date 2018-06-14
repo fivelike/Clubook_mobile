@@ -39,6 +39,14 @@ export class CreateclubPage extends BaseUI {
   }
 
   createClub() {
+    if (this.name == null) {
+      super.showToast(this.toastCtrl, "社团名称不能为空...");
+      return;
+    }
+    if (this.brief == null) {
+      super.showToast(this.toastCtrl, "社团描述不能为空...");
+      return;
+    }
     this.storage.get("token").then((val) => {
       if(val != null){
         var loading = super.showLoading(this.loadingCtrl,"创建中...");

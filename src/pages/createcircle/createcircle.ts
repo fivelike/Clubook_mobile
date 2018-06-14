@@ -38,6 +38,14 @@ export class CreatecirclePage extends BaseUI{
   }
 
   createCircle(){
+    if (this.name == null) {
+      super.showToast(this.toastCtrl, "圈子名称不能为空...");
+      return;
+    }
+    if (this.brief == null) {
+      super.showToast(this.toastCtrl, "圈子描述不能为空...");
+      return;
+    }
     this.storage.get("token").then((val) => {
       if (val != null) {
         var loading = super.showLoading(this.loadingCtrl, "创建中...");
